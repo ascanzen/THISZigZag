@@ -14,19 +14,21 @@ libraries = ["m"]
 
 
 def build():
-    debug_mode_on = '1' if 'debug_mode_on' in os.environ else '0'
+    debug_mode_on = "1"
     extensions = [
         Extension(
             "*",
-            ["zigzag/*.pyx"],
+            ["thiszigzag/*.pyx"],
             extra_compile_args=compile_args,
             extra_link_args=link_args,
             include_dirs=include_dirs,
-            libraries=libraries if os.name != 'nt' else [],
-            define_macros=[('CYTHON_TRACE', debug_mode_on),
-                           ('CYTHON_TRACE_NOGIL', debug_mode_on),
-                           ('CYTHON_BINDING', debug_mode_on),
-                           ('CYTHON_FAST_PYCCALL', '1')],
+            libraries=libraries if os.name != "nt" else [],
+            define_macros=[
+                ("CYTHON_TRACE", debug_mode_on),
+                ("CYTHON_TRACE_NOGIL", debug_mode_on),
+                ("CYTHON_BINDING", debug_mode_on),
+                ("CYTHON_FAST_PYCCALL", "1"),
+            ],
         )
     ]
     ext_modules = cythonize(
@@ -44,7 +46,9 @@ def build():
 
     # Copy built extensions back to the project
     for output in cmd.get_outputs():
-        relative_extension = os.path.relpath(output, cmd.build_lib)
+        print(output)
+        relative_extension = "../" + os.path.relpath(output, cmd.build_lib)
+        print(relative_extension)
         shutil.copyfile(output, relative_extension)
         mode = os.stat(relative_extension).st_mode
         mode |= (mode & 0o444) >> 2
