@@ -5,6 +5,7 @@ from numpy cimport ndarray, int_t
 DEF PEAK = 1
 DEF VALLEY = -1
 
+DEF MIN_CIRCLE = 5
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -27,10 +28,10 @@ cpdef int_t identify_initial_pivot(double [:] X,
     for t in range(1, len(X)):
         x_t = X[t]
 
-        if x_t / min_x >= up_thresh:
+        if x_t / min_x >= up_thresh and t>MIN_CIRCLE:
             return VALLEY if min_t == 0 else PEAK
 
-        if x_t / max_x <= down_thresh:
+        if x_t / max_x <= down_thresh and t>MIN_CIRCLE:
             return PEAK if max_t == 0 else VALLEY
 
         if x_t > max_x:
@@ -67,7 +68,7 @@ def peak_valley_pivots(X, up_thresh, down_thresh):
     if not str(X.dtype).startswith('float'):
         X = X.astype(np.float64)
 
-    return peak_valley_pivots_detailed(X, up_thresh, down_thresh, True, False)
+    return peak_valley_pivots_detailed(X, up_thresh, down_thresh, True, True)
 
 
 @cython.boundscheck(False)
@@ -124,7 +125,8 @@ cpdef peak_valley_pivots_detailed(double [:] X,
         r = x / last_pivot_x
 
         if trend == -1:
-            if r >= up_thresh:
+            # 如果满足最小K线周期约束，改变趋势
+            if r >= up_thresh and (t - last_pivot_t>MIN_CIRCLE):
                 pivots[last_pivot_t] = trend
                 trend = PEAK
                 last_pivot_x = x
@@ -133,7 +135,7 @@ cpdef peak_valley_pivots_detailed(double [:] X,
                 last_pivot_x = x
                 last_pivot_t = t
         else:
-            if r <= down_thresh:
+            if r <= down_thresh and (t- last_pivot_t>MIN_CIRCLE):
                 pivots[last_pivot_t] = trend
                 trend = VALLEY
                 last_pivot_x = x

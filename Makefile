@@ -51,3 +51,8 @@ ensure_clean:
 ifeq ($(shell git status | grep "working directory clean"), )
 	$(error Commit changes before generating docs)
 endif
+
+.PHONY: demo
+demo:
+	python3.9 ./build.py
+	python3.9 ./test.py

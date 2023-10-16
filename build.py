@@ -14,7 +14,7 @@ libraries = ["m"]
 
 
 def build():
-    debug_mode_on = "1"
+    debug_mode_on = "0"
     extensions = [
         Extension(
             "*",

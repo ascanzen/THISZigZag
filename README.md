@@ -4,7 +4,6 @@
 [![GitHub license](https://img.shields.io/github/license/jbn/ZigZag)](https://github.com/jbn/ZigZag/blob/main/LICENSE.txt)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/ZigZag)
 
-
 # ZigZag
 
 ZigZag provides functions for identifying the peaks and valleys of a time
@@ -14,6 +13,10 @@ For fastest understanding, [view the IPython notebook demo tutorial](https://git
 
 ## Contributing
 
-This is an admittedly small project. Still, if you have any contributions, 
+This is an admittedly small project. Still, if you have any contributions,
 please [fork this project on github](https://github.com/jbn/ZigZag) and
 send me a pull request.
+
+## 增加K线数量限制
+
+DEF MIN_CIRCLE = 5

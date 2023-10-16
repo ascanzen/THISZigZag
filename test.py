@@ -3,9 +3,20 @@ from thiszigzag import *
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from loguru import logger
 
 X = np.cumprod(1 + np.random.randn(100) * 0.01)
-pivots = peak_valley_pivots(X, 0.03, -0.03)
+pivots = peak_valley_pivots(X, 0.001, -0.001)
+
+
+logger.info(pivots)
+
+retures = compute_segment_returns(X, pivots)
+logger.info(retures)
+
+logger.info(np.nonzero(pivots))
+
+indexs = np.nonzero(pivots)
 
 
 def plot_pivots(X, pivots):
