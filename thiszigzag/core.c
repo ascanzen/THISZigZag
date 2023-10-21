@@ -6,15 +6,15 @@
         "define_macros": [
             [
                 "CYTHON_TRACE",
-                "1"
+                "0"
             ],
             [
                 "CYTHON_TRACE_NOGIL",
-                "1"
+                "0"
             ],
             [
                 "CYTHON_BINDING",
-                "1"
+                "0"
             ],
             [
                 "CYTHON_FAST_PYCCALL",
@@ -2378,6 +2378,9 @@ static CYTHON_INLINE PyObject* __Pyx_PyInt_From_npy_long(npy_long value);
 /* CIntFromPy.proto */
 static CYTHON_INLINE npy_long __Pyx_PyInt_As_npy_long(PyObject *);
 
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
+
 /* CIntFromPy.proto */
 static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *);
 
@@ -2386,9 +2389,6 @@ static CYTHON_INLINE long __Pyx_PyInt_As_long(PyObject *);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
-
-/* CIntToPy.proto */
-static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
 
 /* CIntFromPy.proto */
 static CYTHON_INLINE char __Pyx_PyInt_As_char(PyObject *);
@@ -2465,7 +2465,7 @@ static PyObject *indirect_contiguous = 0;
 static int __pyx_memoryview_thread_locks_used;
 static PyThread_type_lock __pyx_memoryview_thread_locks[8];
 static __pyx_t_5numpy_int_t __pyx_f_10THISZigZag_10thiszigzag_4core_identify_initial_pivot(__Pyx_memviewslice, double, double, int __pyx_skip_dispatch); /*proto*/
-static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_detailed(__Pyx_memviewslice, double, double, int, int, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_detailed(__Pyx_memviewslice, __Pyx_memviewslice, double, double, int, int, int __pyx_skip_dispatch); /*proto*/
 static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObject *, int __pyx_skip_dispatch); /*proto*/
 static struct __pyx_array_obj *__pyx_array_new(PyObject *, Py_ssize_t, char *, char *, char *); /*proto*/
 static void *__pyx_align_pointer(void *, size_t); /*proto*/
@@ -2519,6 +2519,7 @@ static PyObject *__pyx_builtin_IndexError;
 static const char __pyx_k_[] = ".";
 static const char __pyx_k_O[] = "O";
 static const char __pyx_k_X[] = "X";
+static const char __pyx_k_Y[] = "Y";
 static const char __pyx_k_c[] = "c";
 static const char __pyx_k_t[] = "t";
 static const char __pyx_k_x[] = "x";
@@ -2667,6 +2668,7 @@ static PyObject *__pyx_kp_s_Unable_to_convert_item_to_object;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_View_MemoryView;
 static PyObject *__pyx_n_s_X;
+static PyObject *__pyx_n_s_Y;
 static PyObject *__pyx_n_s_allocate_buffer;
 static PyObject *__pyx_n_s_array;
 static PyObject *__pyx_n_s_astype;
@@ -2766,8 +2768,8 @@ static PyObject *__pyx_n_s_x;
 static PyObject *__pyx_n_s_zeros;
 static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_identify_initial_pivot(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, double __pyx_v_up_thresh, double __pyx_v_down_thresh); /* proto */
 static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_2_to_ndarray(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X); /* proto */
-static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X, PyObject *__pyx_v_up_thresh, PyObject *__pyx_v_down_thresh); /* proto */
-static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_detailed(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, double __pyx_v_up_thresh, double __pyx_v_down_thresh, int __pyx_v_limit_to_finalized_segments, int __pyx_v_use_eager_switching_for_non_final); /* proto */
+static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X, PyObject *__pyx_v_Y, PyObject *__pyx_v_up_thresh, PyObject *__pyx_v_down_thresh); /* proto */
+static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_detailed(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_Y, double __pyx_v_up_thresh, double __pyx_v_down_thresh, int __pyx_v_limit_to_finalized_segments, int __pyx_v_use_eager_switching_for_non_final); /* proto */
 static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_8max_drawdown(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X); /* proto */
 static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_10max_drawdown_c(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_X); /* proto */
 static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_pivots); /* proto */
@@ -2821,7 +2823,7 @@ static PyObject *__pyx_tp_new__memoryviewslice(PyTypeObject *t, PyObject *a, PyO
 static PyObject *__pyx_float_1_0;
 static PyObject *__pyx_int_0;
 static PyObject *__pyx_int_1;
-static PyObject *__pyx_int_5;
+static PyObject *__pyx_int_4;
 static PyObject *__pyx_int_112105877;
 static PyObject *__pyx_int_136983863;
 static PyObject *__pyx_int_184977713;
@@ -3019,7 +3021,7 @@ static __pyx_t_5numpy_int_t __pyx_f_10THISZigZag_10thiszigzag_4core_identify_ini
       __pyx_t_5 = __pyx_t_6;
       goto __pyx_L6_bool_binop_done;
     }
-    __pyx_t_6 = ((__pyx_v_t > 5) != 0);
+    __pyx_t_6 = ((__pyx_v_t > 4) != 0);
     __pyx_t_5 = __pyx_t_6;
     __pyx_L6_bool_binop_done:;
     if (__pyx_t_5) {
@@ -3065,7 +3067,7 @@ static __pyx_t_5numpy_int_t __pyx_f_10THISZigZag_10thiszigzag_4core_identify_ini
       __pyx_t_5 = __pyx_t_6;
       goto __pyx_L9_bool_binop_done;
     }
-    __pyx_t_6 = ((__pyx_v_t > 5) != 0);
+    __pyx_t_6 = ((__pyx_v_t > 4) != 0);
     __pyx_t_5 = __pyx_t_6;
     __pyx_L9_bool_binop_done:;
     if (__pyx_t_5) {
@@ -3545,9 +3547,9 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_2_to_ndarray(CYTHON_UN
 /* "THISZigZag/thiszigzag/core.pyx":64
  * 
  * 
- * def peak_valley_pivots(X, up_thresh, down_thresh):             # <<<<<<<<<<<<<<
+ * def peak_valley_pivots(X, Y,up_thresh, down_thresh):             # <<<<<<<<<<<<<<
  *     X = _to_ndarray(X)
- * 
+ *     Y = _to_ndarray(Y)
  */
 
 /* Python wrapper */
@@ -3555,6 +3557,7 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_5peak_valley_pivots(Py
 static PyMethodDef __pyx_mdef_10THISZigZag_10thiszigzag_4core_5peak_valley_pivots = {"peak_valley_pivots", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_10THISZigZag_10thiszigzag_4core_5peak_valley_pivots, METH_VARARGS|METH_KEYWORDS, 0};
 static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_5peak_valley_pivots(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_X = 0;
+  PyObject *__pyx_v_Y = 0;
   PyObject *__pyx_v_up_thresh = 0;
   PyObject *__pyx_v_down_thresh = 0;
   int __pyx_lineno = 0;
@@ -3564,12 +3567,14 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_5peak_valley_pivots(Py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("peak_valley_pivots (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X,&__pyx_n_s_up_thresh,&__pyx_n_s_down_thresh,0};
-    PyObject* values[3] = {0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X,&__pyx_n_s_Y,&__pyx_n_s_up_thresh,&__pyx_n_s_down_thresh,0};
+    PyObject* values[4] = {0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
         case  3: values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
         CYTHON_FALLTHROUGH;
         case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
@@ -3586,47 +3591,55 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_5peak_valley_pivots(Py
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_up_thresh)) != 0)) kw_args--;
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_Y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots", 1, 3, 3, 1); __PYX_ERR(0, 64, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots", 1, 4, 4, 1); __PYX_ERR(0, 64, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
-        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_down_thresh)) != 0)) kw_args--;
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_up_thresh)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots", 1, 3, 3, 2); __PYX_ERR(0, 64, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots", 1, 4, 4, 2); __PYX_ERR(0, 64, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_down_thresh)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots", 1, 4, 4, 3); __PYX_ERR(0, 64, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "peak_valley_pivots") < 0)) __PYX_ERR(0, 64, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
+      values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
     }
     __pyx_v_X = values[0];
-    __pyx_v_up_thresh = values[1];
-    __pyx_v_down_thresh = values[2];
+    __pyx_v_Y = values[1];
+    __pyx_v_up_thresh = values[2];
+    __pyx_v_down_thresh = values[3];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("peak_valley_pivots", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 64, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("peak_valley_pivots", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 64, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("THISZigZag.thiszigzag.core.peak_valley_pivots", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(__pyx_self, __pyx_v_X, __pyx_v_up_thresh, __pyx_v_down_thresh);
+  __pyx_r = __pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(__pyx_self, __pyx_v_X, __pyx_v_Y, __pyx_v_up_thresh, __pyx_v_down_thresh);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X, PyObject *__pyx_v_up_thresh, PyObject *__pyx_v_down_thresh) {
+static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_X, PyObject *__pyx_v_Y, PyObject *__pyx_v_up_thresh, PyObject *__pyx_v_down_thresh) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3636,20 +3649,22 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CY
   int __pyx_t_5;
   PyObject *__pyx_t_6 = NULL;
   __Pyx_memviewslice __pyx_t_7 = { 0, 0, { 0 }, { 0 }, { 0 } };
-  double __pyx_t_8;
+  __Pyx_memviewslice __pyx_t_8 = { 0, 0, { 0 }, { 0 }, { 0 } };
   double __pyx_t_9;
+  double __pyx_t_10;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("peak_valley_pivots", 0);
   __Pyx_INCREF(__pyx_v_X);
+  __Pyx_INCREF(__pyx_v_Y);
 
   /* "THISZigZag/thiszigzag/core.pyx":65
  * 
- * def peak_valley_pivots(X, up_thresh, down_thresh):
+ * def peak_valley_pivots(X, Y,up_thresh, down_thresh):
  *     X = _to_ndarray(X)             # <<<<<<<<<<<<<<
+ *     Y = _to_ndarray(Y)
  * 
- *     # Ensure float for correct signature
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_to_ndarray); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -3671,35 +3686,62 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CY
   __Pyx_DECREF_SET(__pyx_v_X, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":68
+  /* "THISZigZag/thiszigzag/core.pyx":66
+ * def peak_valley_pivots(X, Y,up_thresh, down_thresh):
+ *     X = _to_ndarray(X)
+ *     Y = _to_ndarray(Y)             # <<<<<<<<<<<<<<
+ * 
+ *     # Ensure float for correct signature
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_to_ndarray); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_Y) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_Y);
+  __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(__pyx_v_Y, __pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "THISZigZag/thiszigzag/core.pyx":69
  * 
  *     # Ensure float for correct signature
  *     if not str(X.dtype).startswith('float'):             # <<<<<<<<<<<<<<
  *         X = X.astype(np.float64)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyUnicode_Tailmatch(__pyx_t_2, __pyx_n_u_float, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Tailmatch(__pyx_t_2, __pyx_n_u_float, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_5 = ((!(__pyx_t_4 != 0)) != 0);
   if (__pyx_t_5) {
 
-    /* "THISZigZag/thiszigzag/core.pyx":69
+    /* "THISZigZag/thiszigzag/core.pyx":70
  *     # Ensure float for correct signature
  *     if not str(X.dtype).startswith('float'):
  *         X = X.astype(np.float64)             # <<<<<<<<<<<<<<
  * 
- *     return peak_valley_pivots_detailed(X, up_thresh, down_thresh, True, True)
+ *     return peak_valley_pivots_detailed(X, Y, up_thresh, down_thresh, True, True)
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_astype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_astype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 69, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -3715,13 +3757,13 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CY
     __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF_SET(__pyx_v_X, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "THISZigZag/thiszigzag/core.pyx":68
+    /* "THISZigZag/thiszigzag/core.pyx":69
  * 
  *     # Ensure float for correct signature
  *     if not str(X.dtype).startswith('float'):             # <<<<<<<<<<<<<<
@@ -3730,22 +3772,26 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CY
  */
   }
 
-  /* "THISZigZag/thiszigzag/core.pyx":71
+  /* "THISZigZag/thiszigzag/core.pyx":72
  *         X = X.astype(np.float64)
  * 
- *     return peak_valley_pivots_detailed(X, up_thresh, down_thresh, True, True)             # <<<<<<<<<<<<<<
+ *     return peak_valley_pivots_detailed(X, Y, up_thresh, down_thresh, True, True)             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_v_X, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 71, __pyx_L1_error)
-  __pyx_t_8 = __pyx_PyFloat_AsDouble(__pyx_v_up_thresh); if (unlikely((__pyx_t_8 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
-  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_v_down_thresh); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 71, __pyx_L1_error)
-  __pyx_t_2 = __pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_detailed(__pyx_t_7, __pyx_t_8, __pyx_t_9, 1, 1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_v_X, PyBUF_WRITABLE); if (unlikely(!__pyx_t_7.memview)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_to_MemoryviewSlice_ds_double(__pyx_v_Y, PyBUF_WRITABLE); if (unlikely(!__pyx_t_8.memview)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_9 = __pyx_PyFloat_AsDouble(__pyx_v_up_thresh); if (unlikely((__pyx_t_9 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_10 = __pyx_PyFloat_AsDouble(__pyx_v_down_thresh); if (unlikely((__pyx_t_10 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_2 = __pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_detailed(__pyx_t_7, __pyx_t_8, __pyx_t_9, __pyx_t_10, 1, 1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
   __pyx_t_7.memview = NULL;
   __pyx_t_7.data = NULL;
+  __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
+  __pyx_t_8.memview = NULL;
+  __pyx_t_8.data = NULL;
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
@@ -3753,9 +3799,9 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CY
   /* "THISZigZag/thiszigzag/core.pyx":64
  * 
  * 
- * def peak_valley_pivots(X, up_thresh, down_thresh):             # <<<<<<<<<<<<<<
+ * def peak_valley_pivots(X, Y,up_thresh, down_thresh):             # <<<<<<<<<<<<<<
  *     X = _to_ndarray(X)
- * 
+ *     Y = _to_ndarray(Y)
  */
 
   /* function exit code */
@@ -3765,25 +3811,27 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_4peak_valley_pivots(CY
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
   __PYX_XDEC_MEMVIEW(&__pyx_t_7, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_t_8, 1);
   __Pyx_AddTraceback("THISZigZag.thiszigzag.core.peak_valley_pivots", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_X);
+  __Pyx_XDECREF(__pyx_v_Y);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "THISZigZag/thiszigzag/core.pyx":76
+/* "THISZigZag/thiszigzag/core.pyx":77
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cpdef peak_valley_pivots_detailed(double [:] X,             # <<<<<<<<<<<<<<
+ * cpdef peak_valley_pivots_detailed(double [:] X, double [:] Y,             # <<<<<<<<<<<<<<
  *                                   double up_thresh,
  *                                   double down_thresh,
  */
 
 static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_7peak_valley_pivots_detailed(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_detailed(__Pyx_memviewslice __pyx_v_X, double __pyx_v_up_thresh, double __pyx_v_down_thresh, int __pyx_v_limit_to_finalized_segments, int __pyx_v_use_eager_switching_for_non_final, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_detailed(__Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_Y, double __pyx_v_up_thresh, double __pyx_v_down_thresh, int __pyx_v_limit_to_finalized_segments, int __pyx_v_use_eager_switching_for_non_final, CYTHON_UNUSED int __pyx_skip_dispatch) {
   __pyx_t_5numpy_int_t __pyx_v_initial_pivot;
   __pyx_t_5numpy_int_t __pyx_v_t_n;
   PyArrayObject *__pyx_v_pivots = 0;
@@ -3793,6 +3841,8 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   double __pyx_v_x;
   double __pyx_v_r;
   PyObject *__pyx_v_t = NULL;
+  int __pyx_v_validate;
+  PyObject *__pyx_v_c = NULL;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_pivots;
   __Pyx_Buffer __pyx_pybuffer_pivots;
   PyObject *__pyx_r = NULL;
@@ -3809,8 +3859,12 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   Py_ssize_t __pyx_t_10;
   PyObject *(*__pyx_t_11)(PyObject *);
   Py_ssize_t __pyx_t_12;
-  int __pyx_t_13;
-  __pyx_t_5numpy_int_t __pyx_t_14;
+  double __pyx_t_13;
+  int __pyx_t_14;
+  long __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
+  Py_ssize_t __pyx_t_17;
+  __pyx_t_5numpy_int_t __pyx_t_18;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3820,7 +3874,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __pyx_pybuffernd_pivots.data = NULL;
   __pyx_pybuffernd_pivots.rcbuffer = &__pyx_pybuffer_pivots;
 
-  /* "THISZigZag/thiszigzag/core.pyx":100
+  /* "THISZigZag/thiszigzag/core.pyx":101
  *     analysis.
  *     """
  *     if down_thresh > 0:             # <<<<<<<<<<<<<<
@@ -3830,20 +3884,20 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __pyx_t_1 = ((__pyx_v_down_thresh > 0.0) != 0);
   if (unlikely(__pyx_t_1)) {
 
-    /* "THISZigZag/thiszigzag/core.pyx":101
+    /* "THISZigZag/thiszigzag/core.pyx":102
  *     """
  *     if down_thresh > 0:
  *         raise ValueError('The down_thresh must be negative.')             # <<<<<<<<<<<<<<
  * 
  *     cdef:
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 101, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_ValueError, __pyx_tuple__2, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_Raise(__pyx_t_2, 0, 0, 0);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __PYX_ERR(0, 101, __pyx_L1_error)
+    __PYX_ERR(0, 102, __pyx_L1_error)
 
-    /* "THISZigZag/thiszigzag/core.pyx":100
+    /* "THISZigZag/thiszigzag/core.pyx":101
  *     analysis.
  *     """
  *     if down_thresh > 0:             # <<<<<<<<<<<<<<
@@ -3852,7 +3906,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  */
   }
 
-  /* "THISZigZag/thiszigzag/core.pyx":104
+  /* "THISZigZag/thiszigzag/core.pyx":105
  * 
  *     cdef:
  *         int_t initial_pivot = identify_initial_pivot(X,             # <<<<<<<<<<<<<<
@@ -3861,7 +3915,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  */
   __pyx_v_initial_pivot = __pyx_f_10THISZigZag_10thiszigzag_4core_identify_initial_pivot(__pyx_v_X, __pyx_v_up_thresh, __pyx_v_down_thresh, 0);
 
-  /* "THISZigZag/thiszigzag/core.pyx":107
+  /* "THISZigZag/thiszigzag/core.pyx":108
  *                                                      up_thresh,
  *                                                      down_thresh)
  *         int_t t_n = len(X)             # <<<<<<<<<<<<<<
@@ -3871,46 +3925,46 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __pyx_t_3 = __Pyx_MemoryView_Len(__pyx_v_X); 
   __pyx_v_t_n = __pyx_t_3;
 
-  /* "THISZigZag/thiszigzag/core.pyx":108
+  /* "THISZigZag/thiszigzag/core.pyx":109
  *                                                      down_thresh)
  *         int_t t_n = len(X)
  *         ndarray[int_t, ndim=1] pivots = np.zeros(t_n, dtype=np.int_)             # <<<<<<<<<<<<<<
  *         int_t trend = -initial_pivot
  *         int_t last_pivot_t = 0
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_npy_long(__pyx_v_t_n); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_npy_long(__pyx_v_t_n); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_np); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_int); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_int); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_7) < 0) __PYX_ERR(0, 108, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_7) < 0) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_7) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_7, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 108, __pyx_L1_error)
+  if (!(likely(((__pyx_t_7) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_7, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 109, __pyx_L1_error)
   __pyx_t_8 = ((PyArrayObject *)__pyx_t_7);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_pivots.rcbuffer->pybuffer, (PyObject*)__pyx_t_8, &__Pyx_TypeInfo_nn___pyx_t_5numpy_int_t, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_pivots = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 108, __pyx_L1_error)
+      __PYX_ERR(0, 109, __pyx_L1_error)
     } else {__pyx_pybuffernd_pivots.diminfo[0].strides = __pyx_pybuffernd_pivots.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_pivots.diminfo[0].shape = __pyx_pybuffernd_pivots.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -3918,7 +3972,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __pyx_v_pivots = ((PyArrayObject *)__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":109
+  /* "THISZigZag/thiszigzag/core.pyx":110
  *         int_t t_n = len(X)
  *         ndarray[int_t, ndim=1] pivots = np.zeros(t_n, dtype=np.int_)
  *         int_t trend = -initial_pivot             # <<<<<<<<<<<<<<
@@ -3927,7 +3981,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  */
   __pyx_v_trend = (-__pyx_v_initial_pivot);
 
-  /* "THISZigZag/thiszigzag/core.pyx":110
+  /* "THISZigZag/thiszigzag/core.pyx":111
  *         ndarray[int_t, ndim=1] pivots = np.zeros(t_n, dtype=np.int_)
  *         int_t trend = -initial_pivot
  *         int_t last_pivot_t = 0             # <<<<<<<<<<<<<<
@@ -3936,7 +3990,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  */
   __pyx_v_last_pivot_t = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":111
+  /* "THISZigZag/thiszigzag/core.pyx":112
  *         int_t trend = -initial_pivot
  *         int_t last_pivot_t = 0
  *         double last_pivot_x = X[0]             # <<<<<<<<<<<<<<
@@ -3946,7 +4000,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __pyx_t_9 = 0;
   __pyx_v_last_pivot_x = (*((double *) ( /* dim=0 */ (__pyx_v_X.data + __pyx_t_9 * __pyx_v_X.strides[0]) )));
 
-  /* "THISZigZag/thiszigzag/core.pyx":114
+  /* "THISZigZag/thiszigzag/core.pyx":115
  *         double x, r
  * 
  *     pivots[0] = initial_pivot             # <<<<<<<<<<<<<<
@@ -3956,7 +4010,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __pyx_t_9 = 0;
   *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides) = __pyx_v_initial_pivot;
 
-  /* "THISZigZag/thiszigzag/core.pyx":120
+  /* "THISZigZag/thiszigzag/core.pyx":121
  *     # computed as x_j / x_1. Then, this value is compared to the threshold + 1.
  *     # This saves (t_n - 1) subtractions.
  *     up_thresh += 1             # <<<<<<<<<<<<<<
@@ -3965,25 +4019,25 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  */
   __pyx_v_up_thresh = (__pyx_v_up_thresh + 1.0);
 
-  /* "THISZigZag/thiszigzag/core.pyx":121
+  /* "THISZigZag/thiszigzag/core.pyx":122
  *     # This saves (t_n - 1) subtractions.
  *     up_thresh += 1
  *     down_thresh += 1             # <<<<<<<<<<<<<<
  * 
- *     for t in range(1, t_n):
+ * 
  */
   __pyx_v_down_thresh = (__pyx_v_down_thresh + 1.0);
 
-  /* "THISZigZag/thiszigzag/core.pyx":123
- *     down_thresh += 1
+  /* "THISZigZag/thiszigzag/core.pyx":125
+ * 
  * 
  *     for t in range(1, t_n):             # <<<<<<<<<<<<<<
- *         x = X[t]
- *         r = x / last_pivot_x
+ * 
+ *         if trend == -1:
  */
-  __pyx_t_7 = __Pyx_PyInt_From_npy_long(__pyx_v_t_n); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyInt_From_npy_long(__pyx_v_t_n); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_int_1);
   __Pyx_GIVEREF(__pyx_int_1);
@@ -3991,16 +4045,16 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __Pyx_GIVEREF(__pyx_t_7);
   PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_7);
   __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_2, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 123, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_Call(__pyx_builtin_range, __pyx_t_2, NULL); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 125, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (likely(PyList_CheckExact(__pyx_t_7)) || PyTuple_CheckExact(__pyx_t_7)) {
     __pyx_t_2 = __pyx_t_7; __Pyx_INCREF(__pyx_t_2); __pyx_t_10 = 0;
     __pyx_t_11 = NULL;
   } else {
-    __pyx_t_10 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_10 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_11 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 123, __pyx_L1_error)
+    __pyx_t_11 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 125, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   for (;;) {
@@ -4008,17 +4062,17 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_10 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_7 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_10); __Pyx_INCREF(__pyx_t_7); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 123, __pyx_L1_error)
+        __pyx_t_7 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_10); __Pyx_INCREF(__pyx_t_7); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 125, __pyx_L1_error)
         #else
-        __pyx_t_7 = PySequence_ITEM(__pyx_t_2, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 123, __pyx_L1_error)
+        __pyx_t_7 = PySequence_ITEM(__pyx_t_2, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 125, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
         #endif
       } else {
         if (__pyx_t_10 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_10); __Pyx_INCREF(__pyx_t_7); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 123, __pyx_L1_error)
+        __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_10); __Pyx_INCREF(__pyx_t_7); __pyx_t_10++; if (unlikely(0 < 0)) __PYX_ERR(0, 125, __pyx_L1_error)
         #else
-        __pyx_t_7 = PySequence_ITEM(__pyx_t_2, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 123, __pyx_L1_error)
+        __pyx_t_7 = PySequence_ITEM(__pyx_t_2, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 125, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
         #endif
       }
@@ -4028,7 +4082,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 123, __pyx_L1_error)
+          else __PYX_ERR(0, 125, __pyx_L1_error)
         }
         break;
       }
@@ -4037,117 +4091,195 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
     __Pyx_XDECREF_SET(__pyx_v_t, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "THISZigZag/thiszigzag/core.pyx":124
- * 
- *     for t in range(1, t_n):
- *         x = X[t]             # <<<<<<<<<<<<<<
- *         r = x / last_pivot_x
- * 
- */
-    __pyx_t_12 = __Pyx_PyIndex_AsSsize_t(__pyx_v_t); if (unlikely((__pyx_t_12 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 124, __pyx_L1_error)
-    __pyx_t_9 = __pyx_t_12;
-    __pyx_v_x = (*((double *) ( /* dim=0 */ (__pyx_v_X.data + __pyx_t_9 * __pyx_v_X.strides[0]) )));
-
-    /* "THISZigZag/thiszigzag/core.pyx":125
- *     for t in range(1, t_n):
- *         x = X[t]
- *         r = x / last_pivot_x             # <<<<<<<<<<<<<<
- * 
- *         if trend == -1:
- */
-    if (unlikely(__pyx_v_last_pivot_x == 0)) {
-      PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 125, __pyx_L1_error)
-    }
-    __pyx_v_r = (__pyx_v_x / __pyx_v_last_pivot_x);
-
     /* "THISZigZag/thiszigzag/core.pyx":127
- *         r = x / last_pivot_x
+ *     for t in range(1, t_n):
  * 
  *         if trend == -1:             # <<<<<<<<<<<<<<
- *             # K
- *             if r >= up_thresh and (t - last_pivot_t>MIN_CIRCLE):
+ *             x = X[t]
+ *             r = x / (last_pivot_x + 0.0001)
  */
     __pyx_t_1 = ((__pyx_v_trend == -1L) != 0);
     if (__pyx_t_1) {
 
+      /* "THISZigZag/thiszigzag/core.pyx":128
+ * 
+ *         if trend == -1:
+ *             x = X[t]             # <<<<<<<<<<<<<<
+ *             r = x / (last_pivot_x + 0.0001)
+ * 
+ */
+      __pyx_t_12 = __Pyx_PyIndex_AsSsize_t(__pyx_v_t); if (unlikely((__pyx_t_12 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 128, __pyx_L1_error)
+      __pyx_t_9 = __pyx_t_12;
+      __pyx_v_x = (*((double *) ( /* dim=0 */ (__pyx_v_X.data + __pyx_t_9 * __pyx_v_X.strides[0]) )));
+
       /* "THISZigZag/thiszigzag/core.pyx":129
  *         if trend == -1:
- *             # K
- *             if r >= up_thresh and (t - last_pivot_t>MIN_CIRCLE):             # <<<<<<<<<<<<<<
- *                 pivots[last_pivot_t] = trend
- *                 trend = PEAK
+ *             x = X[t]
+ *             r = x / (last_pivot_x + 0.0001)             # <<<<<<<<<<<<<<
+ * 
+ *             # :1);2)l3)
  */
-      __pyx_t_13 = ((__pyx_v_r >= __pyx_v_up_thresh) != 0);
-      if (__pyx_t_13) {
+      __pyx_t_13 = (__pyx_v_last_pivot_x + 0.0001);
+      if (unlikely(__pyx_t_13 == 0)) {
+        PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+        __PYX_ERR(0, 129, __pyx_L1_error)
+      }
+      __pyx_v_r = (__pyx_v_x / __pyx_t_13);
+
+      /* "THISZigZag/thiszigzag/core.pyx":132
+ * 
+ *             # :1);2)l3)
+ *             if r >= up_thresh and (t - last_pivot_t > MIN_CIRCLE):             # <<<<<<<<<<<<<<
+ *                 # 5
+ *                 validate = True
+ */
+      __pyx_t_14 = ((__pyx_v_r >= __pyx_v_up_thresh) != 0);
+      if (__pyx_t_14) {
       } else {
-        __pyx_t_1 = __pyx_t_13;
+        __pyx_t_1 = __pyx_t_14;
         goto __pyx_L8_bool_binop_done;
       }
-      __pyx_t_7 = __Pyx_PyInt_From_npy_long(__pyx_v_last_pivot_t); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 129, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyInt_From_npy_long(__pyx_v_last_pivot_t); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 132, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_5 = PyNumber_Subtract(__pyx_v_t, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 129, __pyx_L1_error)
+      __pyx_t_5 = PyNumber_Subtract(__pyx_v_t, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 132, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = PyObject_RichCompare(__pyx_t_5, __pyx_int_5, Py_GT); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 129, __pyx_L1_error)
+      __pyx_t_7 = PyObject_RichCompare(__pyx_t_5, __pyx_int_4, Py_GT); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 132, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 129, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 132, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_1 = __pyx_t_13;
+      __pyx_t_1 = __pyx_t_14;
       __pyx_L8_bool_binop_done:;
       if (__pyx_t_1) {
 
-        /* "THISZigZag/thiszigzag/core.pyx":130
- *             # K
- *             if r >= up_thresh and (t - last_pivot_t>MIN_CIRCLE):
- *                 pivots[last_pivot_t] = trend             # <<<<<<<<<<<<<<
- *                 trend = PEAK
- *                 last_pivot_x = x
+        /* "THISZigZag/thiszigzag/core.pyx":134
+ *             if r >= up_thresh and (t - last_pivot_t > MIN_CIRCLE):
+ *                 # 5
+ *                 validate = True             # <<<<<<<<<<<<<<
+ *                 for c in range(1,MIN_CIRCLE):
+ *                     if Y[t-c] > Y[t]:
  */
-        __pyx_t_9 = __pyx_v_last_pivot_t;
-        *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides) = __pyx_v_trend;
+        __pyx_v_validate = 1;
 
-        /* "THISZigZag/thiszigzag/core.pyx":131
- *             if r >= up_thresh and (t - last_pivot_t>MIN_CIRCLE):
- *                 pivots[last_pivot_t] = trend
- *                 trend = PEAK             # <<<<<<<<<<<<<<
- *                 last_pivot_x = x
- *                 last_pivot_t = t
+        /* "THISZigZag/thiszigzag/core.pyx":135
+ *                 # 5
+ *                 validate = True
+ *                 for c in range(1,MIN_CIRCLE):             # <<<<<<<<<<<<<<
+ *                     if Y[t-c] > Y[t]:
+ *                         validate = False
  */
-        __pyx_v_trend = 1;
+        for (__pyx_t_15 = 1; __pyx_t_15 < 4; __pyx_t_15+=1) {
+          __pyx_t_7 = __Pyx_PyInt_From_long(__pyx_t_15); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 135, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_7);
+          __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_7);
+          __pyx_t_7 = 0;
+
+          /* "THISZigZag/thiszigzag/core.pyx":136
+ *                 validate = True
+ *                 for c in range(1,MIN_CIRCLE):
+ *                     if Y[t-c] > Y[t]:             # <<<<<<<<<<<<<<
+ *                         validate = False
+ *                 if validate:
+ */
+          __pyx_t_7 = PyNumber_Subtract(__pyx_v_t, __pyx_v_c); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 136, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_7);
+          __pyx_t_12 = __Pyx_PyIndex_AsSsize_t(__pyx_t_7); if (unlikely((__pyx_t_12 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+          __pyx_t_9 = __pyx_t_12;
+          __pyx_t_16 = __Pyx_PyIndex_AsSsize_t(__pyx_v_t); if (unlikely((__pyx_t_16 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L1_error)
+          __pyx_t_17 = __pyx_t_16;
+          __pyx_t_1 = (((*((double *) ( /* dim=0 */ (__pyx_v_Y.data + __pyx_t_9 * __pyx_v_Y.strides[0]) ))) > (*((double *) ( /* dim=0 */ (__pyx_v_Y.data + __pyx_t_17 * __pyx_v_Y.strides[0]) )))) != 0);
+          if (__pyx_t_1) {
+
+            /* "THISZigZag/thiszigzag/core.pyx":137
+ *                 for c in range(1,MIN_CIRCLE):
+ *                     if Y[t-c] > Y[t]:
+ *                         validate = False             # <<<<<<<<<<<<<<
+ *                 if validate:
+ *                     pivots[last_pivot_t] = trend
+ */
+            __pyx_v_validate = 0;
+
+            /* "THISZigZag/thiszigzag/core.pyx":136
+ *                 validate = True
+ *                 for c in range(1,MIN_CIRCLE):
+ *                     if Y[t-c] > Y[t]:             # <<<<<<<<<<<<<<
+ *                         validate = False
+ *                 if validate:
+ */
+          }
+        }
+
+        /* "THISZigZag/thiszigzag/core.pyx":138
+ *                     if Y[t-c] > Y[t]:
+ *                         validate = False
+ *                 if validate:             # <<<<<<<<<<<<<<
+ *                     pivots[last_pivot_t] = trend
+ *                     trend = PEAK
+ */
+        __pyx_t_1 = (__pyx_v_validate != 0);
+        if (__pyx_t_1) {
+
+          /* "THISZigZag/thiszigzag/core.pyx":139
+ *                         validate = False
+ *                 if validate:
+ *                     pivots[last_pivot_t] = trend             # <<<<<<<<<<<<<<
+ *                     trend = PEAK
+ *                     last_pivot_x = x
+ */
+          __pyx_t_17 = __pyx_v_last_pivot_t;
+          *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_17, __pyx_pybuffernd_pivots.diminfo[0].strides) = __pyx_v_trend;
+
+          /* "THISZigZag/thiszigzag/core.pyx":140
+ *                 if validate:
+ *                     pivots[last_pivot_t] = trend
+ *                     trend = PEAK             # <<<<<<<<<<<<<<
+ *                     last_pivot_x = x
+ *                     last_pivot_t = t
+ */
+          __pyx_v_trend = 1;
+
+          /* "THISZigZag/thiszigzag/core.pyx":141
+ *                     pivots[last_pivot_t] = trend
+ *                     trend = PEAK
+ *                     last_pivot_x = x             # <<<<<<<<<<<<<<
+ *                     last_pivot_t = t
+ *             # the trend is go one
+ */
+          __pyx_v_last_pivot_x = __pyx_v_x;
+
+          /* "THISZigZag/thiszigzag/core.pyx":142
+ *                     trend = PEAK
+ *                     last_pivot_x = x
+ *                     last_pivot_t = t             # <<<<<<<<<<<<<<
+ *             # the trend is go one
+ *             elif x < last_pivot_x:
+ */
+          __pyx_t_18 = __Pyx_PyInt_As_npy_long(__pyx_v_t); if (unlikely((__pyx_t_18 == ((npy_long)-1)) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L1_error)
+          __pyx_v_last_pivot_t = __pyx_t_18;
+
+          /* "THISZigZag/thiszigzag/core.pyx":138
+ *                     if Y[t-c] > Y[t]:
+ *                         validate = False
+ *                 if validate:             # <<<<<<<<<<<<<<
+ *                     pivots[last_pivot_t] = trend
+ *                     trend = PEAK
+ */
+        }
 
         /* "THISZigZag/thiszigzag/core.pyx":132
- *                 pivots[last_pivot_t] = trend
- *                 trend = PEAK
- *                 last_pivot_x = x             # <<<<<<<<<<<<<<
- *                 last_pivot_t = t
- *             elif x < last_pivot_x:
- */
-        __pyx_v_last_pivot_x = __pyx_v_x;
-
-        /* "THISZigZag/thiszigzag/core.pyx":133
- *                 trend = PEAK
- *                 last_pivot_x = x
- *                 last_pivot_t = t             # <<<<<<<<<<<<<<
- *             elif x < last_pivot_x:
- *                 last_pivot_x = x
- */
-        __pyx_t_14 = __Pyx_PyInt_As_npy_long(__pyx_v_t); if (unlikely((__pyx_t_14 == ((npy_long)-1)) && PyErr_Occurred())) __PYX_ERR(0, 133, __pyx_L1_error)
-        __pyx_v_last_pivot_t = __pyx_t_14;
-
-        /* "THISZigZag/thiszigzag/core.pyx":129
- *         if trend == -1:
- *             # K
- *             if r >= up_thresh and (t - last_pivot_t>MIN_CIRCLE):             # <<<<<<<<<<<<<<
- *                 pivots[last_pivot_t] = trend
- *                 trend = PEAK
+ * 
+ *             # :1);2)l3)
+ *             if r >= up_thresh and (t - last_pivot_t > MIN_CIRCLE):             # <<<<<<<<<<<<<<
+ *                 # 5
+ *                 validate = True
  */
         goto __pyx_L7;
       }
 
-      /* "THISZigZag/thiszigzag/core.pyx":134
- *                 last_pivot_x = x
- *                 last_pivot_t = t
+      /* "THISZigZag/thiszigzag/core.pyx":144
+ *                     last_pivot_t = t
+ *             # the trend is go one
  *             elif x < last_pivot_x:             # <<<<<<<<<<<<<<
  *                 last_pivot_x = x
  *                 last_pivot_t = t
@@ -4155,8 +4287,8 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
       __pyx_t_1 = ((__pyx_v_x < __pyx_v_last_pivot_x) != 0);
       if (__pyx_t_1) {
 
-        /* "THISZigZag/thiszigzag/core.pyx":135
- *                 last_pivot_t = t
+        /* "THISZigZag/thiszigzag/core.pyx":145
+ *             # the trend is go one
  *             elif x < last_pivot_x:
  *                 last_pivot_x = x             # <<<<<<<<<<<<<<
  *                 last_pivot_t = t
@@ -4164,19 +4296,19 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  */
         __pyx_v_last_pivot_x = __pyx_v_x;
 
-        /* "THISZigZag/thiszigzag/core.pyx":136
+        /* "THISZigZag/thiszigzag/core.pyx":146
  *             elif x < last_pivot_x:
  *                 last_pivot_x = x
  *                 last_pivot_t = t             # <<<<<<<<<<<<<<
  *         else:
- *             if r <= down_thresh and (t- last_pivot_t>MIN_CIRCLE):
+ *             x = Y[t]
  */
-        __pyx_t_14 = __Pyx_PyInt_As_npy_long(__pyx_v_t); if (unlikely((__pyx_t_14 == ((npy_long)-1)) && PyErr_Occurred())) __PYX_ERR(0, 136, __pyx_L1_error)
-        __pyx_v_last_pivot_t = __pyx_t_14;
+        __pyx_t_18 = __Pyx_PyInt_As_npy_long(__pyx_v_t); if (unlikely((__pyx_t_18 == ((npy_long)-1)) && PyErr_Occurred())) __PYX_ERR(0, 146, __pyx_L1_error)
+        __pyx_v_last_pivot_t = __pyx_t_18;
 
-        /* "THISZigZag/thiszigzag/core.pyx":134
- *                 last_pivot_x = x
- *                 last_pivot_t = t
+        /* "THISZigZag/thiszigzag/core.pyx":144
+ *                     last_pivot_t = t
+ *             # the trend is go one
  *             elif x < last_pivot_x:             # <<<<<<<<<<<<<<
  *                 last_pivot_x = x
  *                 last_pivot_t = t
@@ -4185,93 +4317,195 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
       __pyx_L7:;
 
       /* "THISZigZag/thiszigzag/core.pyx":127
- *         r = x / last_pivot_x
+ *     for t in range(1, t_n):
  * 
  *         if trend == -1:             # <<<<<<<<<<<<<<
- *             # K
- *             if r >= up_thresh and (t - last_pivot_t>MIN_CIRCLE):
+ *             x = X[t]
+ *             r = x / (last_pivot_x + 0.0001)
  */
       goto __pyx_L6;
     }
 
-    /* "THISZigZag/thiszigzag/core.pyx":138
+    /* "THISZigZag/thiszigzag/core.pyx":148
  *                 last_pivot_t = t
  *         else:
- *             if r <= down_thresh and (t- last_pivot_t>MIN_CIRCLE):             # <<<<<<<<<<<<<<
- *                 pivots[last_pivot_t] = trend
- *                 trend = VALLEY
+ *             x = Y[t]             # <<<<<<<<<<<<<<
+ *             r = x / (last_pivot_x + 0.0001)
+ *             if r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):
  */
     /*else*/ {
-      __pyx_t_13 = ((__pyx_v_r <= __pyx_v_down_thresh) != 0);
-      if (__pyx_t_13) {
-      } else {
-        __pyx_t_1 = __pyx_t_13;
-        goto __pyx_L11_bool_binop_done;
+      __pyx_t_16 = __Pyx_PyIndex_AsSsize_t(__pyx_v_t); if (unlikely((__pyx_t_16 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 148, __pyx_L1_error)
+      __pyx_t_17 = __pyx_t_16;
+      __pyx_v_x = (*((double *) ( /* dim=0 */ (__pyx_v_Y.data + __pyx_t_17 * __pyx_v_Y.strides[0]) )));
+
+      /* "THISZigZag/thiszigzag/core.pyx":149
+ *         else:
+ *             x = Y[t]
+ *             r = x / (last_pivot_x + 0.0001)             # <<<<<<<<<<<<<<
+ *             if r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):
+ * 
+ */
+      __pyx_t_13 = (__pyx_v_last_pivot_x + 0.0001);
+      if (unlikely(__pyx_t_13 == 0)) {
+        PyErr_SetString(PyExc_ZeroDivisionError, "float division");
+        __PYX_ERR(0, 149, __pyx_L1_error)
       }
-      __pyx_t_7 = __Pyx_PyInt_From_npy_long(__pyx_v_last_pivot_t); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 138, __pyx_L1_error)
+      __pyx_v_r = (__pyx_v_x / __pyx_t_13);
+
+      /* "THISZigZag/thiszigzag/core.pyx":150
+ *             x = Y[t]
+ *             r = x / (last_pivot_x + 0.0001)
+ *             if r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):             # <<<<<<<<<<<<<<
+ * 
+ *                 validate = True
+ */
+      __pyx_t_14 = ((__pyx_v_r <= __pyx_v_down_thresh) != 0);
+      if (__pyx_t_14) {
+      } else {
+        __pyx_t_1 = __pyx_t_14;
+        goto __pyx_L15_bool_binop_done;
+      }
+      __pyx_t_7 = __Pyx_PyInt_From_npy_long(__pyx_v_last_pivot_t); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_5 = PyNumber_Subtract(__pyx_v_t, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 138, __pyx_L1_error)
+      __pyx_t_5 = PyNumber_Subtract(__pyx_v_t, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = PyObject_RichCompare(__pyx_t_5, __pyx_int_5, Py_GT); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 138, __pyx_L1_error)
+      __pyx_t_7 = PyObject_RichCompare(__pyx_t_5, __pyx_int_4, Py_GT); __Pyx_XGOTREF(__pyx_t_7); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_13 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_13 < 0)) __PYX_ERR(0, 138, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_1 = __pyx_t_13;
-      __pyx_L11_bool_binop_done:;
+      __pyx_t_1 = __pyx_t_14;
+      __pyx_L15_bool_binop_done:;
       if (__pyx_t_1) {
 
-        /* "THISZigZag/thiszigzag/core.pyx":139
- *         else:
- *             if r <= down_thresh and (t- last_pivot_t>MIN_CIRCLE):
- *                 pivots[last_pivot_t] = trend             # <<<<<<<<<<<<<<
- *                 trend = VALLEY
- *                 last_pivot_x = x
+        /* "THISZigZag/thiszigzag/core.pyx":152
+ *             if r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):
+ * 
+ *                 validate = True             # <<<<<<<<<<<<<<
+ *                 for c in range(1,MIN_CIRCLE):
+ *                     if X[t-c] < X[t]:
  */
-        __pyx_t_9 = __pyx_v_last_pivot_t;
-        *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides) = __pyx_v_trend;
+        __pyx_v_validate = 1;
 
-        /* "THISZigZag/thiszigzag/core.pyx":140
- *             if r <= down_thresh and (t- last_pivot_t>MIN_CIRCLE):
- *                 pivots[last_pivot_t] = trend
- *                 trend = VALLEY             # <<<<<<<<<<<<<<
- *                 last_pivot_x = x
- *                 last_pivot_t = t
+        /* "THISZigZag/thiszigzag/core.pyx":153
+ * 
+ *                 validate = True
+ *                 for c in range(1,MIN_CIRCLE):             # <<<<<<<<<<<<<<
+ *                     if X[t-c] < X[t]:
+ *                         validate = False
  */
-        __pyx_v_trend = -1L;
+        for (__pyx_t_15 = 1; __pyx_t_15 < 4; __pyx_t_15+=1) {
+          __pyx_t_7 = __Pyx_PyInt_From_long(__pyx_t_15); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 153, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_7);
+          __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_7);
+          __pyx_t_7 = 0;
 
-        /* "THISZigZag/thiszigzag/core.pyx":141
- *                 pivots[last_pivot_t] = trend
- *                 trend = VALLEY
- *                 last_pivot_x = x             # <<<<<<<<<<<<<<
- *                 last_pivot_t = t
+          /* "THISZigZag/thiszigzag/core.pyx":154
+ *                 validate = True
+ *                 for c in range(1,MIN_CIRCLE):
+ *                     if X[t-c] < X[t]:             # <<<<<<<<<<<<<<
+ *                         validate = False
+ *                 if validate:
+ */
+          __pyx_t_7 = PyNumber_Subtract(__pyx_v_t, __pyx_v_c); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 154, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_7);
+          __pyx_t_16 = __Pyx_PyIndex_AsSsize_t(__pyx_t_7); if (unlikely((__pyx_t_16 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 154, __pyx_L1_error)
+          __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+          __pyx_t_17 = __pyx_t_16;
+          __pyx_t_12 = __Pyx_PyIndex_AsSsize_t(__pyx_v_t); if (unlikely((__pyx_t_12 == (Py_ssize_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 154, __pyx_L1_error)
+          __pyx_t_9 = __pyx_t_12;
+          __pyx_t_1 = (((*((double *) ( /* dim=0 */ (__pyx_v_X.data + __pyx_t_17 * __pyx_v_X.strides[0]) ))) < (*((double *) ( /* dim=0 */ (__pyx_v_X.data + __pyx_t_9 * __pyx_v_X.strides[0]) )))) != 0);
+          if (__pyx_t_1) {
+
+            /* "THISZigZag/thiszigzag/core.pyx":155
+ *                 for c in range(1,MIN_CIRCLE):
+ *                     if X[t-c] < X[t]:
+ *                         validate = False             # <<<<<<<<<<<<<<
+ *                 if validate:
+ *                     pivots[last_pivot_t] = trend
+ */
+            __pyx_v_validate = 0;
+
+            /* "THISZigZag/thiszigzag/core.pyx":154
+ *                 validate = True
+ *                 for c in range(1,MIN_CIRCLE):
+ *                     if X[t-c] < X[t]:             # <<<<<<<<<<<<<<
+ *                         validate = False
+ *                 if validate:
+ */
+          }
+        }
+
+        /* "THISZigZag/thiszigzag/core.pyx":156
+ *                     if X[t-c] < X[t]:
+ *                         validate = False
+ *                 if validate:             # <<<<<<<<<<<<<<
+ *                     pivots[last_pivot_t] = trend
+ *                     trend = VALLEY
+ */
+        __pyx_t_1 = (__pyx_v_validate != 0);
+        if (__pyx_t_1) {
+
+          /* "THISZigZag/thiszigzag/core.pyx":157
+ *                         validate = False
+ *                 if validate:
+ *                     pivots[last_pivot_t] = trend             # <<<<<<<<<<<<<<
+ *                     trend = VALLEY
+ *                     last_pivot_x = x
+ */
+          __pyx_t_9 = __pyx_v_last_pivot_t;
+          *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides) = __pyx_v_trend;
+
+          /* "THISZigZag/thiszigzag/core.pyx":158
+ *                 if validate:
+ *                     pivots[last_pivot_t] = trend
+ *                     trend = VALLEY             # <<<<<<<<<<<<<<
+ *                     last_pivot_x = x
+ *                     last_pivot_t = t
+ */
+          __pyx_v_trend = -1L;
+
+          /* "THISZigZag/thiszigzag/core.pyx":159
+ *                     pivots[last_pivot_t] = trend
+ *                     trend = VALLEY
+ *                     last_pivot_x = x             # <<<<<<<<<<<<<<
+ *                     last_pivot_t = t
+ * 
+ */
+          __pyx_v_last_pivot_x = __pyx_v_x;
+
+          /* "THISZigZag/thiszigzag/core.pyx":160
+ *                     trend = VALLEY
+ *                     last_pivot_x = x
+ *                     last_pivot_t = t             # <<<<<<<<<<<<<<
+ * 
  *             elif x > last_pivot_x:
  */
-        __pyx_v_last_pivot_x = __pyx_v_x;
+          __pyx_t_18 = __Pyx_PyInt_As_npy_long(__pyx_v_t); if (unlikely((__pyx_t_18 == ((npy_long)-1)) && PyErr_Occurred())) __PYX_ERR(0, 160, __pyx_L1_error)
+          __pyx_v_last_pivot_t = __pyx_t_18;
 
-        /* "THISZigZag/thiszigzag/core.pyx":142
- *                 trend = VALLEY
- *                 last_pivot_x = x
- *                 last_pivot_t = t             # <<<<<<<<<<<<<<
- *             elif x > last_pivot_x:
- *                 last_pivot_x = x
+          /* "THISZigZag/thiszigzag/core.pyx":156
+ *                     if X[t-c] < X[t]:
+ *                         validate = False
+ *                 if validate:             # <<<<<<<<<<<<<<
+ *                     pivots[last_pivot_t] = trend
+ *                     trend = VALLEY
  */
-        __pyx_t_14 = __Pyx_PyInt_As_npy_long(__pyx_v_t); if (unlikely((__pyx_t_14 == ((npy_long)-1)) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L1_error)
-        __pyx_v_last_pivot_t = __pyx_t_14;
+        }
 
-        /* "THISZigZag/thiszigzag/core.pyx":138
- *                 last_pivot_t = t
- *         else:
- *             if r <= down_thresh and (t- last_pivot_t>MIN_CIRCLE):             # <<<<<<<<<<<<<<
- *                 pivots[last_pivot_t] = trend
- *                 trend = VALLEY
+        /* "THISZigZag/thiszigzag/core.pyx":150
+ *             x = Y[t]
+ *             r = x / (last_pivot_x + 0.0001)
+ *             if r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):             # <<<<<<<<<<<<<<
+ * 
+ *                 validate = True
  */
-        goto __pyx_L10;
+        goto __pyx_L14;
       }
 
-      /* "THISZigZag/thiszigzag/core.pyx":143
- *                 last_pivot_x = x
- *                 last_pivot_t = t
+      /* "THISZigZag/thiszigzag/core.pyx":162
+ *                     last_pivot_t = t
+ * 
  *             elif x > last_pivot_x:             # <<<<<<<<<<<<<<
  *                 last_pivot_x = x
  *                 last_pivot_t = t
@@ -4279,8 +4513,8 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
       __pyx_t_1 = ((__pyx_v_x > __pyx_v_last_pivot_x) != 0);
       if (__pyx_t_1) {
 
-        /* "THISZigZag/thiszigzag/core.pyx":144
- *                 last_pivot_t = t
+        /* "THISZigZag/thiszigzag/core.pyx":163
+ * 
  *             elif x > last_pivot_x:
  *                 last_pivot_x = x             # <<<<<<<<<<<<<<
  *                 last_pivot_t = t
@@ -4288,39 +4522,39 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  */
         __pyx_v_last_pivot_x = __pyx_v_x;
 
-        /* "THISZigZag/thiszigzag/core.pyx":145
+        /* "THISZigZag/thiszigzag/core.pyx":164
  *             elif x > last_pivot_x:
  *                 last_pivot_x = x
  *                 last_pivot_t = t             # <<<<<<<<<<<<<<
  * 
  * 
  */
-        __pyx_t_14 = __Pyx_PyInt_As_npy_long(__pyx_v_t); if (unlikely((__pyx_t_14 == ((npy_long)-1)) && PyErr_Occurred())) __PYX_ERR(0, 145, __pyx_L1_error)
-        __pyx_v_last_pivot_t = __pyx_t_14;
+        __pyx_t_18 = __Pyx_PyInt_As_npy_long(__pyx_v_t); if (unlikely((__pyx_t_18 == ((npy_long)-1)) && PyErr_Occurred())) __PYX_ERR(0, 164, __pyx_L1_error)
+        __pyx_v_last_pivot_t = __pyx_t_18;
 
-        /* "THISZigZag/thiszigzag/core.pyx":143
- *                 last_pivot_x = x
- *                 last_pivot_t = t
+        /* "THISZigZag/thiszigzag/core.pyx":162
+ *                     last_pivot_t = t
+ * 
  *             elif x > last_pivot_x:             # <<<<<<<<<<<<<<
  *                 last_pivot_x = x
  *                 last_pivot_t = t
  */
       }
-      __pyx_L10:;
+      __pyx_L14:;
     }
     __pyx_L6:;
 
-    /* "THISZigZag/thiszigzag/core.pyx":123
- *     down_thresh += 1
+    /* "THISZigZag/thiszigzag/core.pyx":125
+ * 
  * 
  *     for t in range(1, t_n):             # <<<<<<<<<<<<<<
- *         x = X[t]
- *         r = x / last_pivot_x
+ * 
+ *         if trend == -1:
  */
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":148
+  /* "THISZigZag/thiszigzag/core.pyx":169
  * 
  * 
  *     if limit_to_finalized_segments:             # <<<<<<<<<<<<<<
@@ -4330,7 +4564,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __pyx_t_1 = (__pyx_v_limit_to_finalized_segments != 0);
   if (__pyx_t_1) {
 
-    /* "THISZigZag/thiszigzag/core.pyx":149
+    /* "THISZigZag/thiszigzag/core.pyx":170
  * 
  *     if limit_to_finalized_segments:
  *         if use_eager_switching_for_non_final:             # <<<<<<<<<<<<<<
@@ -4340,25 +4574,25 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
     __pyx_t_1 = (__pyx_v_use_eager_switching_for_non_final != 0);
     if (__pyx_t_1) {
 
-      /* "THISZigZag/thiszigzag/core.pyx":150
+      /* "THISZigZag/thiszigzag/core.pyx":171
  *     if limit_to_finalized_segments:
  *         if use_eager_switching_for_non_final:
  *             if last_pivot_t > 0 and last_pivot_t < t_n-1:             # <<<<<<<<<<<<<<
  *                 pivots[last_pivot_t] = trend
  *                 pivots[t_n-1] = -trend
  */
-      __pyx_t_13 = ((__pyx_v_last_pivot_t > 0) != 0);
-      if (__pyx_t_13) {
+      __pyx_t_14 = ((__pyx_v_last_pivot_t > 0) != 0);
+      if (__pyx_t_14) {
       } else {
-        __pyx_t_1 = __pyx_t_13;
-        goto __pyx_L16_bool_binop_done;
+        __pyx_t_1 = __pyx_t_14;
+        goto __pyx_L24_bool_binop_done;
       }
-      __pyx_t_13 = ((__pyx_v_last_pivot_t < (__pyx_v_t_n - 1)) != 0);
-      __pyx_t_1 = __pyx_t_13;
-      __pyx_L16_bool_binop_done:;
+      __pyx_t_14 = ((__pyx_v_last_pivot_t < (__pyx_v_t_n - 1)) != 0);
+      __pyx_t_1 = __pyx_t_14;
+      __pyx_L24_bool_binop_done:;
       if (__pyx_t_1) {
 
-        /* "THISZigZag/thiszigzag/core.pyx":151
+        /* "THISZigZag/thiszigzag/core.pyx":172
  *         if use_eager_switching_for_non_final:
  *             if last_pivot_t > 0 and last_pivot_t < t_n-1:
  *                 pivots[last_pivot_t] = trend             # <<<<<<<<<<<<<<
@@ -4368,7 +4602,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
         __pyx_t_9 = __pyx_v_last_pivot_t;
         *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides) = __pyx_v_trend;
 
-        /* "THISZigZag/thiszigzag/core.pyx":152
+        /* "THISZigZag/thiszigzag/core.pyx":173
  *             if last_pivot_t > 0 and last_pivot_t < t_n-1:
  *                 pivots[last_pivot_t] = trend
  *                 pivots[t_n-1] = -trend             # <<<<<<<<<<<<<<
@@ -4378,17 +4612,17 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
         __pyx_t_9 = (__pyx_v_t_n - 1);
         *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides) = (-__pyx_v_trend);
 
-        /* "THISZigZag/thiszigzag/core.pyx":150
+        /* "THISZigZag/thiszigzag/core.pyx":171
  *     if limit_to_finalized_segments:
  *         if use_eager_switching_for_non_final:
  *             if last_pivot_t > 0 and last_pivot_t < t_n-1:             # <<<<<<<<<<<<<<
  *                 pivots[last_pivot_t] = trend
  *                 pivots[t_n-1] = -trend
  */
-        goto __pyx_L15;
+        goto __pyx_L23;
       }
 
-      /* "THISZigZag/thiszigzag/core.pyx":154
+      /* "THISZigZag/thiszigzag/core.pyx":175
  *                 pivots[t_n-1] = -trend
  *             else:
  *                 pivots[t_n-1] = trend             # <<<<<<<<<<<<<<
@@ -4399,19 +4633,19 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
         __pyx_t_9 = (__pyx_v_t_n - 1);
         *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides) = __pyx_v_trend;
       }
-      __pyx_L15:;
+      __pyx_L23:;
 
-      /* "THISZigZag/thiszigzag/core.pyx":149
+      /* "THISZigZag/thiszigzag/core.pyx":170
  * 
  *     if limit_to_finalized_segments:
  *         if use_eager_switching_for_non_final:             # <<<<<<<<<<<<<<
  *             if last_pivot_t > 0 and last_pivot_t < t_n-1:
  *                 pivots[last_pivot_t] = trend
  */
-      goto __pyx_L14;
+      goto __pyx_L22;
     }
 
-    /* "THISZigZag/thiszigzag/core.pyx":156
+    /* "THISZigZag/thiszigzag/core.pyx":177
  *                 pivots[t_n-1] = trend
  *         else:
  *             if last_pivot_t == t_n-1:             # <<<<<<<<<<<<<<
@@ -4422,7 +4656,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
       __pyx_t_1 = ((__pyx_v_last_pivot_t == (__pyx_v_t_n - 1)) != 0);
       if (__pyx_t_1) {
 
-        /* "THISZigZag/thiszigzag/core.pyx":157
+        /* "THISZigZag/thiszigzag/core.pyx":178
  *         else:
  *             if last_pivot_t == t_n-1:
  *                 pivots[last_pivot_t] = trend             # <<<<<<<<<<<<<<
@@ -4432,17 +4666,17 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
         __pyx_t_9 = __pyx_v_last_pivot_t;
         *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides) = __pyx_v_trend;
 
-        /* "THISZigZag/thiszigzag/core.pyx":156
+        /* "THISZigZag/thiszigzag/core.pyx":177
  *                 pivots[t_n-1] = trend
  *         else:
  *             if last_pivot_t == t_n-1:             # <<<<<<<<<<<<<<
  *                 pivots[last_pivot_t] = trend
  *             elif pivots[t_n-1] == 0:
  */
-        goto __pyx_L18;
+        goto __pyx_L26;
       }
 
-      /* "THISZigZag/thiszigzag/core.pyx":158
+      /* "THISZigZag/thiszigzag/core.pyx":179
  *             if last_pivot_t == t_n-1:
  *                 pivots[last_pivot_t] = trend
  *             elif pivots[t_n-1] == 0:             # <<<<<<<<<<<<<<
@@ -4453,7 +4687,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
       __pyx_t_1 = (((*__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides)) == 0) != 0);
       if (__pyx_t_1) {
 
-        /* "THISZigZag/thiszigzag/core.pyx":159
+        /* "THISZigZag/thiszigzag/core.pyx":180
  *                 pivots[last_pivot_t] = trend
  *             elif pivots[t_n-1] == 0:
  *                 pivots[t_n-1] = -trend             # <<<<<<<<<<<<<<
@@ -4463,7 +4697,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
         __pyx_t_9 = (__pyx_v_t_n - 1);
         *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_pivots.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_pivots.diminfo[0].strides) = (-__pyx_v_trend);
 
-        /* "THISZigZag/thiszigzag/core.pyx":158
+        /* "THISZigZag/thiszigzag/core.pyx":179
  *             if last_pivot_t == t_n-1:
  *                 pivots[last_pivot_t] = trend
  *             elif pivots[t_n-1] == 0:             # <<<<<<<<<<<<<<
@@ -4471,11 +4705,11 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  * 
  */
       }
-      __pyx_L18:;
+      __pyx_L26:;
     }
-    __pyx_L14:;
+    __pyx_L22:;
 
-    /* "THISZigZag/thiszigzag/core.pyx":148
+    /* "THISZigZag/thiszigzag/core.pyx":169
  * 
  * 
  *     if limit_to_finalized_segments:             # <<<<<<<<<<<<<<
@@ -4484,7 +4718,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  */
   }
 
-  /* "THISZigZag/thiszigzag/core.pyx":161
+  /* "THISZigZag/thiszigzag/core.pyx":182
  *                 pivots[t_n-1] = -trend
  * 
  *     return pivots             # <<<<<<<<<<<<<<
@@ -4496,10 +4730,10 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __pyx_r = ((PyObject *)__pyx_v_pivots);
   goto __pyx_L0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":76
+  /* "THISZigZag/thiszigzag/core.pyx":77
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cpdef peak_valley_pivots_detailed(double [:] X,             # <<<<<<<<<<<<<<
+ * cpdef peak_valley_pivots_detailed(double [:] X, double [:] Y,             # <<<<<<<<<<<<<<
  *                                   double up_thresh,
  *                                   double down_thresh,
  */
@@ -4525,6 +4759,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
   __pyx_L2:;
   __Pyx_XDECREF((PyObject *)__pyx_v_pivots);
   __Pyx_XDECREF(__pyx_v_t);
+  __Pyx_XDECREF(__pyx_v_c);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -4536,6 +4771,7 @@ static char __pyx_doc_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_detail
 static PyMethodDef __pyx_mdef_10THISZigZag_10thiszigzag_4core_7peak_valley_pivots_detailed = {"peak_valley_pivots_detailed", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_10THISZigZag_10thiszigzag_4core_7peak_valley_pivots_detailed, METH_VARARGS|METH_KEYWORDS, __pyx_doc_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_detailed};
 static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_7peak_valley_pivots_detailed(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   __Pyx_memviewslice __pyx_v_X = { 0, 0, { 0 }, { 0 }, { 0 } };
+  __Pyx_memviewslice __pyx_v_Y = { 0, 0, { 0 }, { 0 }, { 0 } };
   double __pyx_v_up_thresh;
   double __pyx_v_down_thresh;
   int __pyx_v_limit_to_finalized_segments;
@@ -4547,12 +4783,14 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_7peak_valley_pivots_de
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("peak_valley_pivots_detailed (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X,&__pyx_n_s_up_thresh,&__pyx_n_s_down_thresh,&__pyx_n_s_limit_to_finalized_segments,&__pyx_n_s_use_eager_switching_for_non_fina,0};
-    PyObject* values[5] = {0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_X,&__pyx_n_s_Y,&__pyx_n_s_up_thresh,&__pyx_n_s_down_thresh,&__pyx_n_s_limit_to_finalized_segments,&__pyx_n_s_use_eager_switching_for_non_fina,0};
+    PyObject* values[6] = {0,0,0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
+        case  6: values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
+        CYTHON_FALLTHROUGH;
         case  5: values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
         CYTHON_FALLTHROUGH;
         case  4: values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
@@ -4573,33 +4811,39 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_7peak_valley_pivots_de
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
-        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_up_thresh)) != 0)) kw_args--;
+        if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_Y)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 5, 5, 1); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 6, 6, 1); __PYX_ERR(0, 77, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
-        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_down_thresh)) != 0)) kw_args--;
+        if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_up_thresh)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 5, 5, 2); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 6, 6, 2); __PYX_ERR(0, 77, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
-        if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_limit_to_finalized_segments)) != 0)) kw_args--;
+        if (likely((values[3] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_down_thresh)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 5, 5, 3); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 6, 6, 3); __PYX_ERR(0, 77, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
-        if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_use_eager_switching_for_non_fina)) != 0)) kw_args--;
+        if (likely((values[4] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_limit_to_finalized_segments)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 5, 5, 4); __PYX_ERR(0, 76, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 6, 6, 4); __PYX_ERR(0, 77, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  5:
+        if (likely((values[5] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_use_eager_switching_for_non_fina)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 6, 6, 5); __PYX_ERR(0, 77, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "peak_valley_pivots_detailed") < 0)) __PYX_ERR(0, 76, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "peak_valley_pivots_detailed") < 0)) __PYX_ERR(0, 77, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 5) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 6) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
@@ -4607,29 +4851,31 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_7peak_valley_pivots_de
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
       values[3] = PyTuple_GET_ITEM(__pyx_args, 3);
       values[4] = PyTuple_GET_ITEM(__pyx_args, 4);
+      values[5] = PyTuple_GET_ITEM(__pyx_args, 5);
     }
-    __pyx_v_X = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_X.memview)) __PYX_ERR(0, 76, __pyx_L3_error)
-    __pyx_v_up_thresh = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_up_thresh == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 77, __pyx_L3_error)
-    __pyx_v_down_thresh = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_down_thresh == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 78, __pyx_L3_error)
-    __pyx_v_limit_to_finalized_segments = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_limit_to_finalized_segments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L3_error)
-    __pyx_v_use_eager_switching_for_non_final = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_use_eager_switching_for_non_final == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 80, __pyx_L3_error)
+    __pyx_v_X = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[0], PyBUF_WRITABLE); if (unlikely(!__pyx_v_X.memview)) __PYX_ERR(0, 77, __pyx_L3_error)
+    __pyx_v_Y = __Pyx_PyObject_to_MemoryviewSlice_ds_double(values[1], PyBUF_WRITABLE); if (unlikely(!__pyx_v_Y.memview)) __PYX_ERR(0, 77, __pyx_L3_error)
+    __pyx_v_up_thresh = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_up_thresh == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 78, __pyx_L3_error)
+    __pyx_v_down_thresh = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_down_thresh == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 79, __pyx_L3_error)
+    __pyx_v_limit_to_finalized_segments = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_limit_to_finalized_segments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 80, __pyx_L3_error)
+    __pyx_v_use_eager_switching_for_non_final = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_use_eager_switching_for_non_final == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 81, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 5, 5, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 76, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("peak_valley_pivots_detailed", 1, 6, 6, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 77, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("THISZigZag.thiszigzag.core.peak_valley_pivots_detailed", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_detailed(__pyx_self, __pyx_v_X, __pyx_v_up_thresh, __pyx_v_down_thresh, __pyx_v_limit_to_finalized_segments, __pyx_v_use_eager_switching_for_non_final);
+  __pyx_r = __pyx_pf_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_detailed(__pyx_self, __pyx_v_X, __pyx_v_Y, __pyx_v_up_thresh, __pyx_v_down_thresh, __pyx_v_limit_to_finalized_segments, __pyx_v_use_eager_switching_for_non_final);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_detailed(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, double __pyx_v_up_thresh, double __pyx_v_down_thresh, int __pyx_v_limit_to_finalized_segments, int __pyx_v_use_eager_switching_for_non_final) {
+static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_detailed(CYTHON_UNUSED PyObject *__pyx_self, __Pyx_memviewslice __pyx_v_X, __Pyx_memviewslice __pyx_v_Y, double __pyx_v_up_thresh, double __pyx_v_down_thresh, int __pyx_v_limit_to_finalized_segments, int __pyx_v_use_eager_switching_for_non_final) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -4638,8 +4884,9 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_de
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("peak_valley_pivots_detailed", 0);
   __Pyx_XDECREF(__pyx_r);
-  if (unlikely(!__pyx_v_X.memview)) { __Pyx_RaiseUnboundLocalError("X"); __PYX_ERR(0, 76, __pyx_L1_error) }
-  __pyx_t_1 = __pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_detailed(__pyx_v_X, __pyx_v_up_thresh, __pyx_v_down_thresh, __pyx_v_limit_to_finalized_segments, __pyx_v_use_eager_switching_for_non_final, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+  if (unlikely(!__pyx_v_X.memview)) { __Pyx_RaiseUnboundLocalError("X"); __PYX_ERR(0, 77, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_Y.memview)) { __Pyx_RaiseUnboundLocalError("Y"); __PYX_ERR(0, 77, __pyx_L1_error) }
+  __pyx_t_1 = __pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_detailed(__pyx_v_X, __pyx_v_Y, __pyx_v_up_thresh, __pyx_v_down_thresh, __pyx_v_limit_to_finalized_segments, __pyx_v_use_eager_switching_for_non_final, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4652,12 +4899,13 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_6peak_valley_pivots_de
   __pyx_r = NULL;
   __pyx_L0:;
   __PYX_XDEC_MEMVIEW(&__pyx_v_X, 1);
+  __PYX_XDEC_MEMVIEW(&__pyx_v_Y, 1);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "THISZigZag/thiszigzag/core.pyx":164
+/* "THISZigZag/thiszigzag/core.pyx":185
  * 
  * 
  * def max_drawdown(X) -> float:             # <<<<<<<<<<<<<<
@@ -4694,14 +4942,14 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_8max_drawdown(CYTHON_U
   __Pyx_RefNannySetupContext("max_drawdown", 0);
   __Pyx_INCREF(__pyx_v_X);
 
-  /* "THISZigZag/thiszigzag/core.pyx":165
+  /* "THISZigZag/thiszigzag/core.pyx":186
  * 
  * def max_drawdown(X) -> float:
  *     X = _to_ndarray(X)             # <<<<<<<<<<<<<<
  * 
  *     # Ensure float for correct signature
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_to_ndarray); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_to_ndarray); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -4715,41 +4963,41 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_8max_drawdown(CYTHON_U
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_X) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_X);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF_SET(__pyx_v_X, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":168
+  /* "THISZigZag/thiszigzag/core.pyx":189
  * 
  *     # Ensure float for correct signature
  *     if not str(X.dtype).startswith('float'):             # <<<<<<<<<<<<<<
  *         X = X.astype(np.float64)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 168, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_dtype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 168, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(((PyObject *)(&PyUnicode_Type)), __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_4 = __Pyx_PyUnicode_Tailmatch(__pyx_t_2, __pyx_n_u_float, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 168, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyUnicode_Tailmatch(__pyx_t_2, __pyx_n_u_float, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_4 == ((int)-1))) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_5 = ((!(__pyx_t_4 != 0)) != 0);
   if (__pyx_t_5) {
 
-    /* "THISZigZag/thiszigzag/core.pyx":169
+    /* "THISZigZag/thiszigzag/core.pyx":190
  *     # Ensure float for correct signature
  *     if not str(X.dtype).startswith('float'):
  *         X = X.astype(np.float64)             # <<<<<<<<<<<<<<
  * 
  *     return max_drawdown_c(X)
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_astype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_X, __pyx_n_s_astype); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 169, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -4765,13 +5013,13 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_8max_drawdown(CYTHON_U
     __pyx_t_2 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_1, __pyx_t_3, __pyx_t_6) : __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_6);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 169, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 190, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF_SET(__pyx_v_X, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "THISZigZag/thiszigzag/core.pyx":168
+    /* "THISZigZag/thiszigzag/core.pyx":189
  * 
  *     # Ensure float for correct signature
  *     if not str(X.dtype).startswith('float'):             # <<<<<<<<<<<<<<
@@ -4780,7 +5028,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_8max_drawdown(CYTHON_U
  */
   }
 
-  /* "THISZigZag/thiszigzag/core.pyx":171
+  /* "THISZigZag/thiszigzag/core.pyx":192
  *         X = X.astype(np.float64)
  * 
  *     return max_drawdown_c(X)             # <<<<<<<<<<<<<<
@@ -4788,14 +5036,14 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_8max_drawdown(CYTHON_U
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  if (!(likely(((__pyx_v_X) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_X, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 171, __pyx_L1_error)
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(((PyArrayObject *)__pyx_v_X), 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 171, __pyx_L1_error)
+  if (!(likely(((__pyx_v_X) == Py_None) || likely(__Pyx_TypeTest(__pyx_v_X, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 192, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(((PyArrayObject *)__pyx_v_X), 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 192, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_r = __pyx_t_2;
   __pyx_t_2 = 0;
   goto __pyx_L0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":164
+  /* "THISZigZag/thiszigzag/core.pyx":185
  * 
  * 
  * def max_drawdown(X) -> float:             # <<<<<<<<<<<<<<
@@ -4818,7 +5066,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_8max_drawdown(CYTHON_U
   return __pyx_r;
 }
 
-/* "THISZigZag/thiszigzag/core.pyx":176
+/* "THISZigZag/thiszigzag/core.pyx":197
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef double max_drawdown_c(ndarray[double, ndim=1] X):             # <<<<<<<<<<<<<<
@@ -4853,11 +5101,11 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
   __pyx_pybuffernd_X.rcbuffer = &__pyx_pybuffer_X;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_X.rcbuffer->pybuffer, (PyObject*)__pyx_v_X, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 176, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_X.rcbuffer->pybuffer, (PyObject*)__pyx_v_X, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 197, __pyx_L1_error)
   }
   __pyx_pybuffernd_X.diminfo[0].strides = __pyx_pybuffernd_X.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_X.diminfo[0].shape = __pyx_pybuffernd_X.rcbuffer->pybuffer.shape[0];
 
-  /* "THISZigZag/thiszigzag/core.pyx":185
+  /* "THISZigZag/thiszigzag/core.pyx":206
  *     """
  *     cdef:
  *         double mdd = 0             # <<<<<<<<<<<<<<
@@ -4866,7 +5114,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
  */
   __pyx_v_mdd = 0.0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":186
+  /* "THISZigZag/thiszigzag/core.pyx":207
  *     cdef:
  *         double mdd = 0
  *         double peak = X[0]             # <<<<<<<<<<<<<<
@@ -4876,7 +5124,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
   __pyx_t_1 = 0;
   __pyx_v_peak = (*__Pyx_BufPtrStrided1d(double *, __pyx_pybuffernd_X.rcbuffer->pybuffer.buf, __pyx_t_1, __pyx_pybuffernd_X.diminfo[0].strides));
 
-  /* "THISZigZag/thiszigzag/core.pyx":189
+  /* "THISZigZag/thiszigzag/core.pyx":210
  *         double x, dd
  * 
  *     for x in X:             # <<<<<<<<<<<<<<
@@ -4887,26 +5135,26 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
     __pyx_t_2 = ((PyObject *)__pyx_v_X); __Pyx_INCREF(__pyx_t_2); __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(((PyObject *)__pyx_v_X)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 189, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(((PyObject *)__pyx_v_X)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 189, __pyx_L1_error)
+    __pyx_t_4 = Py_TYPE(__pyx_t_2)->tp_iternext; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 210, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_4)) {
       if (likely(PyList_CheckExact(__pyx_t_2))) {
         if (__pyx_t_3 >= PyList_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 189, __pyx_L1_error)
+        __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 210, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 189, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 210, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       } else {
         if (__pyx_t_3 >= PyTuple_GET_SIZE(__pyx_t_2)) break;
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 189, __pyx_L1_error)
+        __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely(0 < 0)) __PYX_ERR(0, 210, __pyx_L1_error)
         #else
-        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 189, __pyx_L1_error)
+        __pyx_t_5 = PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 210, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         #endif
       }
@@ -4916,17 +5164,17 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 189, __pyx_L1_error)
+          else __PYX_ERR(0, 210, __pyx_L1_error)
         }
         break;
       }
       __Pyx_GOTREF(__pyx_t_5);
     }
-    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 189, __pyx_L1_error)
+    __pyx_t_6 = __pyx_PyFloat_AsDouble(__pyx_t_5); if (unlikely((__pyx_t_6 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 210, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_x = __pyx_t_6;
 
-    /* "THISZigZag/thiszigzag/core.pyx":190
+    /* "THISZigZag/thiszigzag/core.pyx":211
  * 
  *     for x in X:
  *         if x > peak:             # <<<<<<<<<<<<<<
@@ -4936,7 +5184,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
     __pyx_t_7 = ((__pyx_v_x > __pyx_v_peak) != 0);
     if (__pyx_t_7) {
 
-      /* "THISZigZag/thiszigzag/core.pyx":191
+      /* "THISZigZag/thiszigzag/core.pyx":212
  *     for x in X:
  *         if x > peak:
  *             peak = x             # <<<<<<<<<<<<<<
@@ -4945,7 +5193,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
  */
       __pyx_v_peak = __pyx_v_x;
 
-      /* "THISZigZag/thiszigzag/core.pyx":190
+      /* "THISZigZag/thiszigzag/core.pyx":211
  * 
  *     for x in X:
  *         if x > peak:             # <<<<<<<<<<<<<<
@@ -4954,7 +5202,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
  */
     }
 
-    /* "THISZigZag/thiszigzag/core.pyx":193
+    /* "THISZigZag/thiszigzag/core.pyx":214
  *             peak = x
  * 
  *         dd = (peak - x) / peak             # <<<<<<<<<<<<<<
@@ -4964,11 +5212,11 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
     __pyx_t_6 = (__pyx_v_peak - __pyx_v_x);
     if (unlikely(__pyx_v_peak == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 193, __pyx_L1_error)
+      __PYX_ERR(0, 214, __pyx_L1_error)
     }
     __pyx_v_dd = (__pyx_t_6 / __pyx_v_peak);
 
-    /* "THISZigZag/thiszigzag/core.pyx":195
+    /* "THISZigZag/thiszigzag/core.pyx":216
  *         dd = (peak - x) / peak
  * 
  *         if dd > mdd:             # <<<<<<<<<<<<<<
@@ -4978,7 +5226,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
     __pyx_t_7 = ((__pyx_v_dd > __pyx_v_mdd) != 0);
     if (__pyx_t_7) {
 
-      /* "THISZigZag/thiszigzag/core.pyx":196
+      /* "THISZigZag/thiszigzag/core.pyx":217
  * 
  *         if dd > mdd:
  *             mdd = dd             # <<<<<<<<<<<<<<
@@ -4987,7 +5235,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
  */
       __pyx_v_mdd = __pyx_v_dd;
 
-      /* "THISZigZag/thiszigzag/core.pyx":195
+      /* "THISZigZag/thiszigzag/core.pyx":216
  *         dd = (peak - x) / peak
  * 
  *         if dd > mdd:             # <<<<<<<<<<<<<<
@@ -4996,7 +5244,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
  */
     }
 
-    /* "THISZigZag/thiszigzag/core.pyx":189
+    /* "THISZigZag/thiszigzag/core.pyx":210
  *         double x, dd
  * 
  *     for x in X:             # <<<<<<<<<<<<<<
@@ -5006,7 +5254,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":198
+  /* "THISZigZag/thiszigzag/core.pyx":219
  *             mdd = dd
  * 
  *     return mdd if mdd != 0.0 else 0.0             # <<<<<<<<<<<<<<
@@ -5021,7 +5269,7 @@ static double __pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(PyArrayObje
   __pyx_r = __pyx_t_6;
   goto __pyx_L0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":176
+  /* "THISZigZag/thiszigzag/core.pyx":197
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef double max_drawdown_c(ndarray[double, ndim=1] X):             # <<<<<<<<<<<<<<
@@ -5060,7 +5308,7 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_11max_drawdown_c(PyObj
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("max_drawdown_c (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_X), __pyx_ptype_5numpy_ndarray, 1, "X", 0))) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_X), __pyx_ptype_5numpy_ndarray, 1, "X", 0))) __PYX_ERR(0, 197, __pyx_L1_error)
   __pyx_r = __pyx_pf_10THISZigZag_10thiszigzag_4core_10max_drawdown_c(__pyx_self, ((PyArrayObject *)__pyx_v_X));
 
   /* function exit code */
@@ -5088,11 +5336,11 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_10max_drawdown_c(CYTHO
   __pyx_pybuffernd_X.rcbuffer = &__pyx_pybuffer_X;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_X.rcbuffer->pybuffer, (PyObject*)__pyx_v_X, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 176, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_X.rcbuffer->pybuffer, (PyObject*)__pyx_v_X, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 197, __pyx_L1_error)
   }
   __pyx_pybuffernd_X.diminfo[0].strides = __pyx_pybuffernd_X.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_X.diminfo[0].shape = __pyx_pybuffernd_X.rcbuffer->pybuffer.shape[0];
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(__pyx_v_X, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_f_10THISZigZag_10thiszigzag_4core_max_drawdown_c(__pyx_v_X, 0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5118,7 +5366,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_10max_drawdown_c(CYTHO
   return __pyx_r;
 }
 
-/* "THISZigZag/thiszigzag/core.pyx":203
+/* "THISZigZag/thiszigzag/core.pyx":224
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def pivots_to_modes(int_t [:] pivots):             # <<<<<<<<<<<<<<
@@ -5139,7 +5387,7 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_13pivots_to_modes(PyOb
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("pivots_to_modes (wrapper)", 0);
   assert(__pyx_arg_pivots); {
-    __pyx_v_pivots = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5numpy_int_t(__pyx_arg_pivots, PyBUF_WRITABLE); if (unlikely(!__pyx_v_pivots.memview)) __PYX_ERR(0, 203, __pyx_L3_error)
+    __pyx_v_pivots = __Pyx_PyObject_to_MemoryviewSlice_ds_nn___pyx_t_5numpy_int_t(__pyx_arg_pivots, PyBUF_WRITABLE); if (unlikely(!__pyx_v_pivots.memview)) __PYX_ERR(0, 224, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5184,63 +5432,63 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
   __pyx_pybuffernd_modes.data = NULL;
   __pyx_pybuffernd_modes.rcbuffer = &__pyx_pybuffer_modes;
 
-  /* "THISZigZag/thiszigzag/core.pyx":214
+  /* "THISZigZag/thiszigzag/core.pyx":235
  *     cdef:
  *         int_t x, t
  *         ndarray[int_t, ndim=1] modes = np.zeros(len(pivots),             # <<<<<<<<<<<<<<
  *                                                 dtype=np.int_)
  *         int_t mode = -pivots[0]
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_zeros); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_3 = __Pyx_MemoryView_Len(__pyx_v_pivots); 
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_1);
   PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":215
+  /* "THISZigZag/thiszigzag/core.pyx":236
  *         int_t x, t
  *         ndarray[int_t, ndim=1] modes = np.zeros(len(pivots),
  *                                                 dtype=np.int_)             # <<<<<<<<<<<<<<
  *         int_t mode = -pivots[0]
  * 
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_int); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 215, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_int); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 215, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 236, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":214
+  /* "THISZigZag/thiszigzag/core.pyx":235
  *     cdef:
  *         int_t x, t
  *         ndarray[int_t, ndim=1] modes = np.zeros(len(pivots),             # <<<<<<<<<<<<<<
  *                                                 dtype=np.int_)
  *         int_t mode = -pivots[0]
  */
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 214, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 235, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 214, __pyx_L1_error)
+  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 235, __pyx_L1_error)
   __pyx_t_7 = ((PyArrayObject *)__pyx_t_6);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_modes.rcbuffer->pybuffer, (PyObject*)__pyx_t_7, &__Pyx_TypeInfo_nn___pyx_t_5numpy_int_t, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_modes = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_modes.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 214, __pyx_L1_error)
+      __PYX_ERR(0, 235, __pyx_L1_error)
     } else {__pyx_pybuffernd_modes.diminfo[0].strides = __pyx_pybuffernd_modes.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_modes.diminfo[0].shape = __pyx_pybuffernd_modes.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -5248,7 +5496,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
   __pyx_v_modes = ((PyArrayObject *)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":216
+  /* "THISZigZag/thiszigzag/core.pyx":237
  *         ndarray[int_t, ndim=1] modes = np.zeros(len(pivots),
  *                                                 dtype=np.int_)
  *         int_t mode = -pivots[0]             # <<<<<<<<<<<<<<
@@ -5258,7 +5506,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
   __pyx_t_8 = 0;
   __pyx_v_mode = (-(*((__pyx_t_5numpy_int_t *) ( /* dim=0 */ (__pyx_v_pivots.data + __pyx_t_8 * __pyx_v_pivots.strides[0]) ))));
 
-  /* "THISZigZag/thiszigzag/core.pyx":218
+  /* "THISZigZag/thiszigzag/core.pyx":239
  *         int_t mode = -pivots[0]
  * 
  *     modes[0] = pivots[0]             # <<<<<<<<<<<<<<
@@ -5269,7 +5517,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
   __pyx_t_9 = 0;
   *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_modes.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_modes.diminfo[0].strides) = (*((__pyx_t_5numpy_int_t *) ( /* dim=0 */ (__pyx_v_pivots.data + __pyx_t_8 * __pyx_v_pivots.strides[0]) )));
 
-  /* "THISZigZag/thiszigzag/core.pyx":220
+  /* "THISZigZag/thiszigzag/core.pyx":241
  *     modes[0] = pivots[0]
  * 
  *     for t in range(1, len(pivots)):             # <<<<<<<<<<<<<<
@@ -5281,7 +5529,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
   for (__pyx_t_11 = 1; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
     __pyx_v_t = __pyx_t_11;
 
-    /* "THISZigZag/thiszigzag/core.pyx":221
+    /* "THISZigZag/thiszigzag/core.pyx":242
  * 
  *     for t in range(1, len(pivots)):
  *         x = pivots[t]             # <<<<<<<<<<<<<<
@@ -5291,7 +5539,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
     __pyx_t_8 = __pyx_v_t;
     __pyx_v_x = (*((__pyx_t_5numpy_int_t *) ( /* dim=0 */ (__pyx_v_pivots.data + __pyx_t_8 * __pyx_v_pivots.strides[0]) )));
 
-    /* "THISZigZag/thiszigzag/core.pyx":222
+    /* "THISZigZag/thiszigzag/core.pyx":243
  *     for t in range(1, len(pivots)):
  *         x = pivots[t]
  *         if x != 0:             # <<<<<<<<<<<<<<
@@ -5301,7 +5549,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
     __pyx_t_12 = ((__pyx_v_x != 0) != 0);
     if (__pyx_t_12) {
 
-      /* "THISZigZag/thiszigzag/core.pyx":223
+      /* "THISZigZag/thiszigzag/core.pyx":244
  *         x = pivots[t]
  *         if x != 0:
  *             modes[t] = mode             # <<<<<<<<<<<<<<
@@ -5311,7 +5559,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
       __pyx_t_8 = __pyx_v_t;
       *__Pyx_BufPtrStrided1d(__pyx_t_5numpy_int_t *, __pyx_pybuffernd_modes.rcbuffer->pybuffer.buf, __pyx_t_8, __pyx_pybuffernd_modes.diminfo[0].strides) = __pyx_v_mode;
 
-      /* "THISZigZag/thiszigzag/core.pyx":224
+      /* "THISZigZag/thiszigzag/core.pyx":245
  *         if x != 0:
  *             modes[t] = mode
  *             mode = -x             # <<<<<<<<<<<<<<
@@ -5320,7 +5568,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
  */
       __pyx_v_mode = (-__pyx_v_x);
 
-      /* "THISZigZag/thiszigzag/core.pyx":222
+      /* "THISZigZag/thiszigzag/core.pyx":243
  *     for t in range(1, len(pivots)):
  *         x = pivots[t]
  *         if x != 0:             # <<<<<<<<<<<<<<
@@ -5330,7 +5578,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
       goto __pyx_L5;
     }
 
-    /* "THISZigZag/thiszigzag/core.pyx":226
+    /* "THISZigZag/thiszigzag/core.pyx":247
  *             mode = -x
  *         else:
  *             modes[t] = mode             # <<<<<<<<<<<<<<
@@ -5344,7 +5592,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
     __pyx_L5:;
   }
 
-  /* "THISZigZag/thiszigzag/core.pyx":228
+  /* "THISZigZag/thiszigzag/core.pyx":249
  *             modes[t] = mode
  * 
  *     return modes             # <<<<<<<<<<<<<<
@@ -5356,7 +5604,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
   __pyx_r = ((PyObject *)__pyx_v_modes);
   goto __pyx_L0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":203
+  /* "THISZigZag/thiszigzag/core.pyx":224
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def pivots_to_modes(int_t [:] pivots):             # <<<<<<<<<<<<<<
@@ -5390,7 +5638,7 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_12pivots_to_modes(CYTH
   return __pyx_r;
 }
 
-/* "THISZigZag/thiszigzag/core.pyx":231
+/* "THISZigZag/thiszigzag/core.pyx":252
  * 
  * 
  * def compute_segment_returns(X, pivots):             # <<<<<<<<<<<<<<
@@ -5434,11 +5682,11 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_15compute_segment_retu
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_pivots)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("compute_segment_returns", 1, 2, 2, 1); __PYX_ERR(0, 231, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("compute_segment_returns", 1, 2, 2, 1); __PYX_ERR(0, 252, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "compute_segment_returns") < 0)) __PYX_ERR(0, 231, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "compute_segment_returns") < 0)) __PYX_ERR(0, 252, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -5451,7 +5699,7 @@ static PyObject *__pyx_pw_10THISZigZag_10thiszigzag_4core_15compute_segment_retu
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("compute_segment_returns", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 231, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("compute_segment_returns", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 252, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("THISZigZag.thiszigzag.core.compute_segment_returns", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -5477,14 +5725,14 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_14compute_segment_retu
   __Pyx_RefNannySetupContext("compute_segment_returns", 0);
   __Pyx_INCREF(__pyx_v_X);
 
-  /* "THISZigZag/thiszigzag/core.pyx":234
+  /* "THISZigZag/thiszigzag/core.pyx":255
  *     """
  *     :return: numpy array of the pivot-to-pivot returns for each segment."""
  *     X = _to_ndarray(X)             # <<<<<<<<<<<<<<
  *     pivot_points = X[pivots != 0]
  *     return pivot_points[1:] / pivot_points[:-1] - 1.0
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_to_ndarray); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 234, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_to_ndarray); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -5498,48 +5746,48 @@ static PyObject *__pyx_pf_10THISZigZag_10thiszigzag_4core_14compute_segment_retu
   }
   __pyx_t_1 = (__pyx_t_3) ? __Pyx_PyObject_Call2Args(__pyx_t_2, __pyx_t_3, __pyx_v_X) : __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_X);
   __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 234, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF_SET(__pyx_v_X, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":235
+  /* "THISZigZag/thiszigzag/core.pyx":256
  *     :return: numpy array of the pivot-to-pivot returns for each segment."""
  *     X = _to_ndarray(X)
  *     pivot_points = X[pivots != 0]             # <<<<<<<<<<<<<<
  *     return pivot_points[1:] / pivot_points[:-1] - 1.0
  */
-  __pyx_t_1 = __Pyx_PyInt_NeObjC(__pyx_v_pivots, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_NeObjC(__pyx_v_pivots, __pyx_int_0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_X, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_X, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 256, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_pivot_points = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":236
+  /* "THISZigZag/thiszigzag/core.pyx":257
  *     X = _to_ndarray(X)
  *     pivot_points = X[pivots != 0]
  *     return pivot_points[1:] / pivot_points[:-1] - 1.0             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_pivot_points, 1, 0, NULL, NULL, &__pyx_slice__3, 1, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetSlice(__pyx_v_pivot_points, 1, 0, NULL, NULL, &__pyx_slice__3, 1, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_pivot_points, 0, -1L, NULL, NULL, &__pyx_slice__4, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetSlice(__pyx_v_pivot_points, 0, -1L, NULL, NULL, &__pyx_slice__4, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyFloat_SubtractObjC(__pyx_t_3, __pyx_float_1_0, 1.0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyFloat_SubtractObjC(__pyx_t_3, __pyx_float_1_0, 1.0, 0, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":231
+  /* "THISZigZag/thiszigzag/core.pyx":252
  * 
  * 
  * def compute_segment_returns(X, pivots):             # <<<<<<<<<<<<<<
@@ -20433,6 +20681,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_View_MemoryView, __pyx_k_View_MemoryView, sizeof(__pyx_k_View_MemoryView), 0, 0, 1, 1},
   {&__pyx_n_s_X, __pyx_k_X, sizeof(__pyx_k_X), 0, 0, 1, 1},
+  {&__pyx_n_s_Y, __pyx_k_Y, sizeof(__pyx_k_Y), 0, 0, 1, 1},
   {&__pyx_n_s_allocate_buffer, __pyx_k_allocate_buffer, sizeof(__pyx_k_allocate_buffer), 0, 0, 1, 1},
   {&__pyx_n_s_array, __pyx_k_array, sizeof(__pyx_k_array), 0, 0, 1, 1},
   {&__pyx_n_s_astype, __pyx_k_astype, sizeof(__pyx_k_astype), 0, 0, 1, 1},
@@ -20534,7 +20783,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 28, __pyx_L1_error)
-  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_builtin_ValueError = __Pyx_GetBuiltinName(__pyx_n_s_ValueError); if (!__pyx_builtin_ValueError) __PYX_ERR(0, 102, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 944, __pyx_L1_error)
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(2, 149, __pyx_L1_error)
   __pyx_builtin_enumerate = __Pyx_GetBuiltinName(__pyx_n_s_enumerate); if (!__pyx_builtin_enumerate) __PYX_ERR(2, 152, __pyx_L1_error)
@@ -20551,26 +20800,26 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "THISZigZag/thiszigzag/core.pyx":101
+  /* "THISZigZag/thiszigzag/core.pyx":102
  *     """
  *     if down_thresh > 0:
  *         raise ValueError('The down_thresh must be negative.')             # <<<<<<<<<<<<<<
  * 
  *     cdef:
  */
-  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_The_down_thresh_must_be_negative); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 101, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(1, __pyx_kp_u_The_down_thresh_must_be_negative); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 102, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "THISZigZag/thiszigzag/core.pyx":236
+  /* "THISZigZag/thiszigzag/core.pyx":257
  *     X = _to_ndarray(X)
  *     pivot_points = X[pivots != 0]
  *     return pivot_points[1:] / pivot_points[:-1] - 1.0             # <<<<<<<<<<<<<<
  */
-  __pyx_slice__3 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__3)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_slice__3 = PySlice_New(__pyx_int_1, Py_None, Py_None); if (unlikely(!__pyx_slice__3)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__3);
   __Pyx_GIVEREF(__pyx_slice__3);
-  __pyx_slice__4 = PySlice_New(Py_None, __pyx_int_neg_1, Py_None); if (unlikely(!__pyx_slice__4)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_slice__4 = PySlice_New(Py_None, __pyx_int_neg_1, Py_None); if (unlikely(!__pyx_slice__4)) __PYX_ERR(0, 257, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_slice__4);
   __Pyx_GIVEREF(__pyx_slice__4);
 
@@ -20818,74 +21067,74 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   /* "THISZigZag/thiszigzag/core.pyx":64
  * 
  * 
- * def peak_valley_pivots(X, up_thresh, down_thresh):             # <<<<<<<<<<<<<<
+ * def peak_valley_pivots(X, Y,up_thresh, down_thresh):             # <<<<<<<<<<<<<<
  *     X = _to_ndarray(X)
- * 
+ *     Y = _to_ndarray(Y)
  */
-  __pyx_tuple__30 = PyTuple_Pack(3, __pyx_n_s_X, __pyx_n_s_up_thresh, __pyx_n_s_down_thresh); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_tuple__30 = PyTuple_Pack(4, __pyx_n_s_X, __pyx_n_s_Y, __pyx_n_s_up_thresh, __pyx_n_s_down_thresh); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__30);
   __Pyx_GIVEREF(__pyx_tuple__30);
-  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_peak_valley_pivots, 64, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 64, __pyx_L1_error)
+  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_peak_valley_pivots, 64, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 64, __pyx_L1_error)
 
-  /* "THISZigZag/thiszigzag/core.pyx":76
+  /* "THISZigZag/thiszigzag/core.pyx":77
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cpdef peak_valley_pivots_detailed(double [:] X,             # <<<<<<<<<<<<<<
+ * cpdef peak_valley_pivots_detailed(double [:] X, double [:] Y,             # <<<<<<<<<<<<<<
  *                                   double up_thresh,
  *                                   double down_thresh,
  */
-  __pyx_tuple__32 = PyTuple_Pack(5, __pyx_n_s_X, __pyx_n_s_up_thresh, __pyx_n_s_down_thresh, __pyx_n_s_limit_to_finalized_segments, __pyx_n_s_use_eager_switching_for_non_fina); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(6, __pyx_n_s_X, __pyx_n_s_Y, __pyx_n_s_up_thresh, __pyx_n_s_down_thresh, __pyx_n_s_limit_to_finalized_segments, __pyx_n_s_use_eager_switching_for_non_fina); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__32);
   __Pyx_GIVEREF(__pyx_tuple__32);
-  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(5, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_peak_valley_pivots_detailed, 76, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(6, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_peak_valley_pivots_detailed, 77, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 77, __pyx_L1_error)
 
-  /* "THISZigZag/thiszigzag/core.pyx":164
+  /* "THISZigZag/thiszigzag/core.pyx":185
  * 
  * 
  * def max_drawdown(X) -> float:             # <<<<<<<<<<<<<<
  *     X = _to_ndarray(X)
  * 
  */
-  __pyx_tuple__34 = PyTuple_Pack(1, __pyx_n_s_X); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_tuple__34 = PyTuple_Pack(1, __pyx_n_s_X); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__34);
   __Pyx_GIVEREF(__pyx_tuple__34);
-  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_max_drawdown, 164, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_codeobj__35 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__34, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_max_drawdown, 185, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__35)) __PYX_ERR(0, 185, __pyx_L1_error)
 
-  /* "THISZigZag/thiszigzag/core.pyx":176
+  /* "THISZigZag/thiszigzag/core.pyx":197
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef double max_drawdown_c(ndarray[double, ndim=1] X):             # <<<<<<<<<<<<<<
  *     """
  *     Compute the maximum drawdown of some sequence.
  */
-  __pyx_tuple__36 = PyTuple_Pack(1, __pyx_n_s_X); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_tuple__36 = PyTuple_Pack(1, __pyx_n_s_X); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__36);
   __Pyx_GIVEREF(__pyx_tuple__36);
-  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_max_drawdown_c, 176, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_codeobj__37 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__36, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_max_drawdown_c, 197, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__37)) __PYX_ERR(0, 197, __pyx_L1_error)
 
-  /* "THISZigZag/thiszigzag/core.pyx":203
+  /* "THISZigZag/thiszigzag/core.pyx":224
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def pivots_to_modes(int_t [:] pivots):             # <<<<<<<<<<<<<<
  *     """
  *     Translate pivots into trend modes.
  */
-  __pyx_tuple__38 = PyTuple_Pack(6, __pyx_n_s_pivots, __pyx_n_s_pivots, __pyx_n_s_x, __pyx_n_s_t, __pyx_n_s_modes, __pyx_n_s_mode); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_tuple__38 = PyTuple_Pack(6, __pyx_n_s_pivots, __pyx_n_s_pivots, __pyx_n_s_x, __pyx_n_s_t, __pyx_n_s_modes, __pyx_n_s_mode); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__38);
   __Pyx_GIVEREF(__pyx_tuple__38);
-  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_pivots_to_modes, 203, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_pivots_to_modes, 224, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) __PYX_ERR(0, 224, __pyx_L1_error)
 
-  /* "THISZigZag/thiszigzag/core.pyx":231
+  /* "THISZigZag/thiszigzag/core.pyx":252
  * 
  * 
  * def compute_segment_returns(X, pivots):             # <<<<<<<<<<<<<<
  *     """
  *     :return: numpy array of the pivot-to-pivot returns for each segment."""
  */
-  __pyx_tuple__40 = PyTuple_Pack(3, __pyx_n_s_X, __pyx_n_s_pivots, __pyx_n_s_pivot_points); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_tuple__40 = PyTuple_Pack(3, __pyx_n_s_X, __pyx_n_s_pivots, __pyx_n_s_pivot_points); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
-  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_compute_segment_returns, 231, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_codeobj__41 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__40, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_thiszigzag_core_pyx, __pyx_n_s_compute_segment_returns, 252, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__41)) __PYX_ERR(0, 252, __pyx_L1_error)
 
   /* "View.MemoryView":287
  *         return self.name
@@ -20963,7 +21212,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitGlobals(void) {
   __pyx_float_1_0 = PyFloat_FromDouble(1.0); if (unlikely(!__pyx_float_1_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_0 = PyInt_FromLong(0); if (unlikely(!__pyx_int_0)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_int_5 = PyInt_FromLong(5); if (unlikely(!__pyx_int_5)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_4 = PyInt_FromLong(4); if (unlikely(!__pyx_int_4)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_112105877 = PyInt_FromLong(112105877L); if (unlikely(!__pyx_int_112105877)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_136983863 = PyInt_FromLong(136983863L); if (unlikely(!__pyx_int_136983863)) __PYX_ERR(0, 1, __pyx_L1_error)
   __pyx_int_184977713 = PyInt_FromLong(184977713L); if (unlikely(!__pyx_int_184977713)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -21391,78 +21640,78 @@ if (!__Pyx_RefNanny) {
   /* "THISZigZag/thiszigzag/core.pyx":64
  * 
  * 
- * def peak_valley_pivots(X, up_thresh, down_thresh):             # <<<<<<<<<<<<<<
+ * def peak_valley_pivots(X, Y,up_thresh, down_thresh):             # <<<<<<<<<<<<<<
  *     X = _to_ndarray(X)
- * 
+ *     Y = _to_ndarray(Y)
  */
   __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_5peak_valley_pivots, 0, __pyx_n_s_peak_valley_pivots, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_peak_valley_pivots, __pyx_t_1) < 0) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":76
+  /* "THISZigZag/thiszigzag/core.pyx":77
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cpdef peak_valley_pivots_detailed(double [:] X,             # <<<<<<<<<<<<<<
+ * cpdef peak_valley_pivots_detailed(double [:] X, double [:] Y,             # <<<<<<<<<<<<<<
  *                                   double up_thresh,
  *                                   double down_thresh,
  */
-  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_7peak_valley_pivots_detailed, 0, __pyx_n_s_peak_valley_pivots_detailed, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_7peak_valley_pivots_detailed, 0, __pyx_n_s_peak_valley_pivots_detailed, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_peak_valley_pivots_detailed, __pyx_t_1) < 0) __PYX_ERR(0, 76, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_peak_valley_pivots_detailed, __pyx_t_1) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":164
+  /* "THISZigZag/thiszigzag/core.pyx":185
  * 
  * 
  * def max_drawdown(X) -> float:             # <<<<<<<<<<<<<<
  *     X = _to_ndarray(X)
  * 
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_return, __pyx_n_u_float) < 0) __PYX_ERR(0, 164, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_9max_drawdown, 0, __pyx_n_s_max_drawdown, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_return, __pyx_n_u_float) < 0) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_9max_drawdown, 0, __pyx_n_s_max_drawdown, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__35)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_max_drawdown, __pyx_t_2) < 0) __PYX_ERR(0, 164, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_max_drawdown, __pyx_t_2) < 0) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":176
+  /* "THISZigZag/thiszigzag/core.pyx":197
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * cpdef double max_drawdown_c(ndarray[double, ndim=1] X):             # <<<<<<<<<<<<<<
  *     """
  *     Compute the maximum drawdown of some sequence.
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_11max_drawdown_c, 0, __pyx_n_s_max_drawdown_c, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_11max_drawdown_c, 0, __pyx_n_s_max_drawdown_c, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__37)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_max_drawdown_c, __pyx_t_2) < 0) __PYX_ERR(0, 176, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_max_drawdown_c, __pyx_t_2) < 0) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":203
+  /* "THISZigZag/thiszigzag/core.pyx":224
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
  * def pivots_to_modes(int_t [:] pivots):             # <<<<<<<<<<<<<<
  *     """
  *     Translate pivots into trend modes.
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_13pivots_to_modes, 0, __pyx_n_s_pivots_to_modes, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_13pivots_to_modes, 0, __pyx_n_s_pivots_to_modes, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__39)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pivots_to_modes, __pyx_t_2) < 0) __PYX_ERR(0, 203, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_pivots_to_modes, __pyx_t_2) < 0) __PYX_ERR(0, 224, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "THISZigZag/thiszigzag/core.pyx":231
+  /* "THISZigZag/thiszigzag/core.pyx":252
  * 
  * 
  * def compute_segment_returns(X, pivots):             # <<<<<<<<<<<<<<
  *     """
  *     :return: numpy array of the pivot-to-pivot returns for each segment."""
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_15compute_segment_returns, 0, __pyx_n_s_compute_segment_returns, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_10THISZigZag_10thiszigzag_4core_15compute_segment_returns, 0, __pyx_n_s_compute_segment_returns, NULL, __pyx_n_s_THISZigZag_thiszigzag_core, __pyx_d, ((PyObject *)__pyx_codeobj__41)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_compute_segment_returns, __pyx_t_2) < 0) __PYX_ERR(0, 231, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_compute_segment_returns, __pyx_t_2) < 0) __PYX_ERR(0, 252, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "THISZigZag/thiszigzag/core.pyx":1
@@ -26478,6 +26727,44 @@ raise_neg_overflow:
     return (npy_long) -1;
 }
 
+/* CIntToPy */
+    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wconversion"
+#endif
+    const long neg_one = (long) -1, const_zero = (long) 0;
+#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
+#pragma GCC diagnostic pop
+#endif
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(long) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(long) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
+#endif
+        }
+    } else {
+        if (sizeof(long) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
+#endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(long),
+                                     little, !is_unsigned);
+    }
+}
+
 /* CIntFromPy */
     static CYTHON_INLINE int __Pyx_PyInt_As_int(PyObject *x) {
 #ifdef __Pyx_HAS_GCC_DIAGNOSTIC
@@ -26904,44 +27191,6 @@ raise_neg_overflow:
         int one = 1; int little = (int)*(unsigned char *)&one;
         unsigned char *bytes = (unsigned char *)&value;
         return _PyLong_FromByteArray(bytes, sizeof(int),
-                                     little, !is_unsigned);
-    }
-}
-
-/* CIntToPy */
-    static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wconversion"
-#endif
-    const long neg_one = (long) -1, const_zero = (long) 0;
-#ifdef __Pyx_HAS_GCC_DIAGNOSTIC
-#pragma GCC diagnostic pop
-#endif
-    const int is_unsigned = neg_one > const_zero;
-    if (is_unsigned) {
-        if (sizeof(long) < sizeof(long)) {
-            return PyInt_FromLong((long) value);
-        } else if (sizeof(long) <= sizeof(unsigned long)) {
-            return PyLong_FromUnsignedLong((unsigned long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(long) <= sizeof(unsigned PY_LONG_LONG)) {
-            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
-#endif
-        }
-    } else {
-        if (sizeof(long) <= sizeof(long)) {
-            return PyInt_FromLong((long) value);
-#ifdef HAVE_LONG_LONG
-        } else if (sizeof(long) <= sizeof(PY_LONG_LONG)) {
-            return PyLong_FromLongLong((PY_LONG_LONG) value);
-#endif
-        }
-    }
-    {
-        int one = 1; int little = (int)*(unsigned char *)&one;
-        unsigned char *bytes = (unsigned char *)&value;
-        return _PyLong_FromByteArray(bytes, sizeof(long),
                                      little, !is_unsigned);
     }
 }

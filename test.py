@@ -6,7 +6,7 @@ import pandas as pd
 from loguru import logger
 
 X = np.cumprod(1 + np.random.randn(100) * 0.01)
-pivots = peak_valley_pivots(X, 0.001, -0.001)
+pivots = peak_valley_pivots(X, X, 0.001, -0.001)
 
 
 logger.info(pivots)
