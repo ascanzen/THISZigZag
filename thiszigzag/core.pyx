@@ -5,7 +5,7 @@ from numpy cimport ndarray, int_t
 DEF PEAK = 1
 DEF VALLEY = -1
 
-DEF MIN_CIRCLE = 5 - 1
+DEF MIN_CIRCLE = 3
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
@@ -121,63 +121,51 @@ cpdef peak_valley_pivots_detailed(double [:] X, double [:] Y,
     up_thresh += 1
     down_thresh += 1
 
-    
+    # X -> low Y -> high
     for t in range(1, t_n):
 
         if trend == -1:
-            x = X[t]
+            x = Y[t]
             r = x / (last_pivot_x + 0.0001)   
 
-            # 上升笔起点确定:1)当前根最高值大于前五根任一根;2)前第五根l值是当前根到前第五根的最低点。3)若条件成立，则定为上升笔的开始。            
-            if r >= up_thresh and (t - last_pivot_t > MIN_CIRCLE):
-                # 确保高点基本性质：最近5根最高
+            # 上升笔起点确定:1)当前根最高值大于前五根任一根;2)前第五根l值是当前根到前第五根的最低点。3)若条件成立，则定为上升笔的开始。    
+            # 低点更低，趋势持续
+            if X[t] < last_pivot_x:
+                last_pivot_x = X[t]
+                last_pivot_t = t                    
+            elif r >= up_thresh and (t - last_pivot_t > MIN_CIRCLE):
+                # 确保高点基本性质：最高
                 validate = True
-                for c in range(1,MIN_CIRCLE):
-                    if Y[t-c] > Y[t]:
+                for c in range(last_pivot_t,t):
+                    if Y[c] > Y[t]:
                         validate = False
+                        break
                 if validate:
                     pivots[last_pivot_t] = trend
                     trend = PEAK
-                    last_pivot_x = x
+                    last_pivot_x = Y[t]
                     last_pivot_t = t        
-            # the trend is go one
-            elif x < last_pivot_x:
-                last_pivot_x = x
-                last_pivot_t = t
         else:
-            x = Y[t]
+            x = X[t]
             r = x / (last_pivot_x + 0.0001)   
-            if r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):
-
+            # 高点更高，趋势持续
+            if Y[t] > last_pivot_x:
+                last_pivot_x = Y[t]
+                last_pivot_t = t            
+            elif r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):
                 validate = True
-                for c in range(1,MIN_CIRCLE):
-                    if X[t-c] < X[t]:
+                for c in range(last_pivot_t,t):
+                    if X[c] < X[t]:
                         validate = False
+                        break
                 if validate:
                     pivots[last_pivot_t] = trend
                     trend = VALLEY
-                    last_pivot_x = x
+                    last_pivot_x = X[t]
                     last_pivot_t = t          
 
-            elif x > last_pivot_x:
-                last_pivot_x = x
-                last_pivot_t = t
 
-
-
-
-    if limit_to_finalized_segments:
-        if use_eager_switching_for_non_final:
-            if last_pivot_t > 0 and last_pivot_t < t_n-1:
-                pivots[last_pivot_t] = trend
-                pivots[t_n-1] = -trend
-            else:
-                pivots[t_n-1] = trend
-        else:
-            if last_pivot_t == t_n-1:
-                pivots[last_pivot_t] = trend
-            elif pivots[t_n-1] == 0:
-                pivots[t_n-1] = -trend
+    pivots[last_pivot_t] = trend
 
     return pivots
 
