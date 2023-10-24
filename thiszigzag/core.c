@@ -4200,7 +4200,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  *             elif r >= up_thresh and (t - last_pivot_t > MIN_CIRCLE):
  *                 #
  *                 validate = True             # <<<<<<<<<<<<<<
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  *                     if Y[c] > Y[t]:
  */
         __pyx_v_validate = 1;
@@ -4208,11 +4208,11 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
         /* "THISZigZag/thiszigzag/core.pyx":139
  *                 #
  *                 validate = True
- *                 for c in range(last_pivot_t,t):             # <<<<<<<<<<<<<<
+ *                 for c in range(last_pivot_t+1,t):             # <<<<<<<<<<<<<<
  *                     if Y[c] > Y[t]:
  *                         validate = False
  */
-        __pyx_t_7 = __Pyx_PyInt_From_npy_long(__pyx_v_last_pivot_t); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 139, __pyx_L1_error)
+        __pyx_t_7 = __Pyx_PyInt_From_npy_long((__pyx_v_last_pivot_t + 1)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 139, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
         __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 139, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
@@ -4270,7 +4270,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
 
           /* "THISZigZag/thiszigzag/core.pyx":140
  *                 validate = True
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  *                     if Y[c] > Y[t]:             # <<<<<<<<<<<<<<
  *                         validate = False
  *                         break
@@ -4283,7 +4283,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
           if (__pyx_t_1) {
 
             /* "THISZigZag/thiszigzag/core.pyx":141
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  *                     if Y[c] > Y[t]:
  *                         validate = False             # <<<<<<<<<<<<<<
  *                         break
@@ -4302,7 +4302,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
 
             /* "THISZigZag/thiszigzag/core.pyx":140
  *                 validate = True
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  *                     if Y[c] > Y[t]:             # <<<<<<<<<<<<<<
  *                         validate = False
  *                         break
@@ -4312,7 +4312,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
           /* "THISZigZag/thiszigzag/core.pyx":139
  *                 #
  *                 validate = True
- *                 for c in range(last_pivot_t,t):             # <<<<<<<<<<<<<<
+ *                 for c in range(last_pivot_t+1,t):             # <<<<<<<<<<<<<<
  *                     if Y[c] > Y[t]:
  *                         validate = False
  */
@@ -4473,7 +4473,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  *                 last_pivot_t = t
  *             elif r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):             # <<<<<<<<<<<<<<
  *                 validate = True
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  */
       __pyx_t_15 = ((__pyx_v_r <= __pyx_v_down_thresh) != 0);
       if (__pyx_t_15) {
@@ -4498,7 +4498,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  *                 last_pivot_t = t
  *             elif r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):
  *                 validate = True             # <<<<<<<<<<<<<<
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  *                     if X[c] < X[t]:
  */
         __pyx_v_validate = 1;
@@ -4506,11 +4506,11 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
         /* "THISZigZag/thiszigzag/core.pyx":157
  *             elif r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):
  *                 validate = True
- *                 for c in range(last_pivot_t,t):             # <<<<<<<<<<<<<<
+ *                 for c in range(last_pivot_t+1,t):             # <<<<<<<<<<<<<<
  *                     if X[c] < X[t]:
  *                         validate = False
  */
-        __pyx_t_5 = __Pyx_PyInt_From_npy_long(__pyx_v_last_pivot_t); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
+        __pyx_t_5 = __Pyx_PyInt_From_npy_long((__pyx_v_last_pivot_t + 1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_5);
         __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 157, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_7);
@@ -4568,7 +4568,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
 
           /* "THISZigZag/thiszigzag/core.pyx":158
  *                 validate = True
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  *                     if X[c] < X[t]:             # <<<<<<<<<<<<<<
  *                         validate = False
  *                         break
@@ -4581,7 +4581,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
           if (__pyx_t_1) {
 
             /* "THISZigZag/thiszigzag/core.pyx":159
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  *                     if X[c] < X[t]:
  *                         validate = False             # <<<<<<<<<<<<<<
  *                         break
@@ -4600,7 +4600,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
 
             /* "THISZigZag/thiszigzag/core.pyx":158
  *                 validate = True
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  *                     if X[c] < X[t]:             # <<<<<<<<<<<<<<
  *                         validate = False
  *                         break
@@ -4610,7 +4610,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
           /* "THISZigZag/thiszigzag/core.pyx":157
  *             elif r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):
  *                 validate = True
- *                 for c in range(last_pivot_t,t):             # <<<<<<<<<<<<<<
+ *                 for c in range(last_pivot_t+1,t):             # <<<<<<<<<<<<<<
  *                     if X[c] < X[t]:
  *                         validate = False
  */
@@ -4682,7 +4682,7 @@ static PyObject *__pyx_f_10THISZigZag_10thiszigzag_4core_peak_valley_pivots_deta
  *                 last_pivot_t = t
  *             elif r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):             # <<<<<<<<<<<<<<
  *                 validate = True
- *                 for c in range(last_pivot_t,t):
+ *                 for c in range(last_pivot_t+1,t):
  */
       }
       __pyx_L14:;

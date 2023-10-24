@@ -136,7 +136,7 @@ cpdef peak_valley_pivots_detailed(double [:] X, double [:] Y,
             elif r >= up_thresh and (t - last_pivot_t > MIN_CIRCLE):
                 # 确保高点基本性质：最高
                 validate = True
-                for c in range(last_pivot_t,t):
+                for c in range(last_pivot_t+1,t):
                     if Y[c] > Y[t]:
                         validate = False
                         break
@@ -154,7 +154,7 @@ cpdef peak_valley_pivots_detailed(double [:] X, double [:] Y,
                 last_pivot_t = t            
             elif r <= down_thresh and (t - last_pivot_t > MIN_CIRCLE):
                 validate = True
-                for c in range(last_pivot_t,t):
+                for c in range(last_pivot_t+1,t):
                     if X[c] < X[t]:
                         validate = False
                         break
