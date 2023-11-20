@@ -122,7 +122,8 @@ cpdef peak_valley_pivots_detailed(double [:] X, double [:] Y,
     down_thresh += 1
 
     # X -> low Y -> high
-    for t in range(1, t_n):
+    # fix: 最后一根K线需要再次check
+    for t in [*range(1, t_n),t_n-1]:
 
         if trend == -1:
             x = Y[t]
